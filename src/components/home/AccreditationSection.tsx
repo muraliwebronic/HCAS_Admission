@@ -25,34 +25,34 @@ interface LogoItem {
 const LOGOS: LogoItem[] = [
   {
     name: "India Today Ranking",
-    src: "/hcas-images/partners/images.jpeg",
+    src: "./hcas-images/partners./images.jpeg",
     alt: "India Today Ranking",
   },
   {
     name: "ISO Certified",
-    src: "/hcas-images/partners/download.jpeg",
+    src: "./hcas-images/partners/download.jpeg",
     alt: "ISO 9001:2015 Certified",
   },
   // Note: 'download-8.png' is often NAAC in these datasets, but swapped if needed
   {
     name: "NAAC",
-    src: "/hcas-images/partners/download-8.png",
+    src: "./hcas-images/partners/download-8.png",
     alt: "NAAC Accreditation",
   },
   {
     name: "ABET",
-    src: "/hcas-images/partners/abet-1.png",
+    src: "./hcas-images/partners/abet-1.png",
     alt: "ABET Computing Accreditation",
   },
   // Reusing available images for the remaining slots to prevent broken links
   {
     name: "ICAR",
-    src: "/hcas-images/partners/images.jpeg",
+    src: "./hcas-images/partners./images.jpeg",
     alt: "ICAR",
   },
   {
     name: "Times Now",
-    src: "/hcas-images/partners/download.jpeg",
+    src: "./hcas-images/partners/download.jpeg",
     alt: "Times Now",
   },
 ];
@@ -195,7 +195,7 @@ export const WhyHCASSection: React.FC = () => {
                         
                         {/* Logo Centered */}
                         <img 
-                          src="/images/logo.png" 
+                          src="./images/logo.png" 
                           alt="HCAS Logo" 
                           className="w-48 md:w-64 h-auto object-contain z-10 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                         />

@@ -3,8 +3,8 @@ import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, Scroll, BookOpen } 
 
 // --- ASSETS & CONFIG ---
 export const CAPS = {
-  green: "/images/greencap.png",
-  blue: "/images/bluecap.png",
+  green: "./images/greencap.png",
+  blue: "./images/bluecap.png",
 };
 
 // --- TYPES ---
@@ -91,7 +91,7 @@ export const programsData: SectionData[] = [
     theme: 'blue',
     layout: 'static-left',
     icon: Scroll,
-    bgImage: '/images/sclor.jpg',
+    bgImage: './images/sclor.jpg',
     staticList: [
       'PH.D BIOTECHNOLOGY', 'PH.D MICROBIOLOGY', 'PH.D COMMERCE',
       'PH.D COMPUTER SCIENCE', 'PH.D MANAGEMENT STUDIES',
