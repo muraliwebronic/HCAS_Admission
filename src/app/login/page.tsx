@@ -93,7 +93,7 @@ export default function EnquiryPage() {
                             <div className="flex items-center gap-4">
                                 <div className=" h-14  bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
                                     <img
-                                        src="/hcas-images/HCAS.png"
+                                        src="./hcas-images/HCAS.png"
                                         alt="HCAS Logo"
                                         className="object-contain h-14 rounded-2xl"
                                     />
