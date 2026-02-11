@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MapPin, Phone, Smartphone, Mail, Globe, ChevronRight, Facebook, Twitter, Linkedin, Wifi, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Phone, Smartphone, Mail, Globe, ChevronRight, Facebook, Twitter, Linkedin, Instagram, Youtube, Send, User, BookOpen } from 'lucide-react';
 
 // --- DATA CONFIGURATION ---
 const footerData = {
@@ -11,28 +11,20 @@ const footerData = {
     description: "A Unit of Hindustan Group of Institutions, affiliated to the University of Madras and is accorded the Minority Status by National Commission for Minority Educational Institutions, Govt. of India."
   },
   campusAddress: {
-    title: "Campus Address",
+    title: "Contact Details",
     details: [
       { icon: MapPin, text: "Padur, Kelambakkam (OMR), Rajiv Gandhi Salai, Chennai - 603 103." },
-      { icon: Phone, text: "+044 6903 4444 / +044 - 2747 4671" },
-      { icon: Smartphone, text: "+91 7092288037" },
+      { icon: Phone, text: "+044 6903 4444 / 2747 4671" },
+      { icon: Smartphone, text: "+91 97898 85555" }, // Combined Admission Mobile here
       { icon: Mail, text: "hcaspadur@yahoo.co.in" },
       { icon: Globe, text: "www.hcaschennai.edu.in" }
     ]
   },
-  admissionAddress: {
-    title: "Admission Office",
-    details: [
-      { icon: MapPin, text: "No:115/1, 2nd Floor, Kamaraj Avenue, 2nd Street, Adyar, Near Bharath School, Chennai - 600 020." },
-      { icon: Phone, text: "+ 044 - 2446 9714 / 2446 9715" },
-      { icon: Smartphone, text: "+91 9789885555" },
-      { icon: Mail, text: "hcasadmin@gmail.com" },
-      { icon: Globe, text: "www.hcaschennai.edu.in" }
-    ]
-  },
+  // Added Placement URL here
   quickLinks: [
     { text: "About us", href: "#" },
     { text: "Admission", href: "#" },
+    { text: "Placement", href: "https://hcaschennai.edu.in/placement/" }, // NEW LINK
     { text: "Courses", href: "#" },
     { text: "Staff Login", href: "#" },
     { text: "Online Payment", href: "#" },
@@ -54,9 +46,7 @@ const Footer = () => {
       {/* --- BACKGROUND AMBIENCE --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.05]"></div>
-          {/* Blue Blob (Top Right) */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow" />
-          {/* Red Blob (Bottom Left) */}
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[100px] mix-blend-screen" />
       </div>
 
@@ -67,7 +57,6 @@ const Footer = () => {
           {/* --- COLUMN 1: BRANDING --- */}
           <div className="flex flex-col justify-start">
             <div className="flex items-center gap-4 mb-6">
-              {/* Logo Placeholder */}
               <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                  <span className="font-bold text-3xl text-red-500 font-serif">H</span>
               </div>
@@ -84,7 +73,6 @@ const Footer = () => {
               {footerData.about.description}
             </p>
             
-            {/* Social Icons (Mobile/Tablet usually prefer them here) */}
             <div className="flex gap-3">
                 {footerData.socials.map((social, idx) => (
                     <a key={idx} href={social.href} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white hover:-translate-y-1 transition-all duration-300 border border-white/10">
@@ -94,7 +82,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* --- COLUMN 2: CAMPUS ADDRESS --- */}
+          {/* --- COLUMN 2: CONTACT INFO --- */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-widest mb-8 text-white flex items-center gap-2">
               <span className="w-8 h-0.5 bg-red-600"></span> {footerData.campusAddress.title}
@@ -113,23 +101,41 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* --- COLUMN 3: ADMISSION OFFICE --- */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest mb-8 text-white flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-red-600"></span> {footerData.admissionAddress.title}
+          {/* --- COLUMN 3: QUICK ENQUIRY FORM (NEW) --- */}
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
+            <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-white flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-red-600"></span> Quick Enquiry
             </h3>
-            <ul className="space-y-6">
-                {footerData.admissionAddress.details.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-4 group">
-                        <div className="p-2 rounded-lg bg-blue-900/30 text-red-500 group-hover:text-white group-hover:bg-red-600 transition-colors mt-1">
-                            <item.icon size={16} />
-                        </div>
-                        <span className="text-sm text-blue-100/70 group-hover:text-white transition-colors leading-relaxed">
-                            {item.text}
-                        </span>
-                    </li>
-                ))}
-            </ul>
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="relative group">
+                    <User size={16} className="absolute left-3 top-3.5 text-gray-400 group-focus-within:text-blue-400 transition-colors" />
+                    <input 
+                        type="text" 
+                        placeholder="Your Name" 
+                        className="w-full bg-blue-950/50 border border-blue-900/50 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                    />
+                </div>
+                <div className="relative group">
+                    <Smartphone size={16} className="absolute left-3 top-3.5 text-gray-400 group-focus-within:text-blue-400 transition-colors" />
+                    <input 
+                        type="tel" 
+                        placeholder="Mobile Number" 
+                        className="w-full bg-blue-950/50 border border-blue-900/50 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                    />
+                </div>
+                <div className="relative group">
+                    <BookOpen size={16} className="absolute left-3 top-3.5 text-gray-400 group-focus-within:text-blue-400 transition-colors" />
+                    <select className="w-full bg-blue-950/50 border border-blue-900/50 rounded-xl py-3 pl-10 pr-4 text-sm text-gray-400 focus:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer">
+                        <option value="" disabled selected>Select Course</option>
+                        <option value="ug">UG Courses</option>
+                        <option value="pg">PG Courses</option>
+                        <option value="research">Research</option>
+                    </select>
+                </div>
+                <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm mt-2">
+                    Submit Request <Send size={14} />
+                </button>
+            </form>
           </div>
 
           {/* --- COLUMN 4: QUICK LINKS --- */}
@@ -166,7 +172,6 @@ const Footer = () => {
         </div>
       </div>
       
-
     </footer>
   );
 };

@@ -14,10 +14,11 @@ const ScholarshipContactSection = () => {
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-red-100/40 rounded-full blur-[100px] mix-blend-multiply" />
       </div>
 
-      {/* PARENT CONTAINER */}
+      {/* PARENT CONTAINER: 'items-stretch' makes both columns equal height */}
       <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-8 relative z-10 items-stretch">
         
         {/* --- LEFT PANEL: IMAGES --- */}
+        {/* FIX: Removed fixed percentages. Added 'h-full' to ensure it takes parent height. */}
         <div className="w-full lg:w-[40%] flex flex-col gap-6 lg:h-auto">
             
             {/* Header for Mobile Only */}
@@ -30,6 +31,7 @@ const ScholarshipContactSection = () => {
             </div>
 
             {/* TOP CARD (Banner) */}
+            {/* FIX: 'lg:flex-[4]' tells it to take 4 parts of space. 'lg:h-auto' allows it to grow. */}
             <div className="relative h-[300px] lg:h-auto lg:flex-[3] rounded-[2rem] overflow-hidden group shadow-2xl shadow-blue-900/10">
                 <img 
                   src="./images/sclor.jpg" 
@@ -52,9 +54,13 @@ const ScholarshipContactSection = () => {
                     </div>
                 </div>
             </div>
+
+          
+
         </div>
 
         {/* --- RIGHT PANEL: CONTACT CONTENT --- */}
+        {/* This panel dictates the height because of the text content */}
         <div className="w-full lg:w-[60%] bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-10 lg:p-12 border border-white shadow-xl flex flex-col justify-center">
           
           <div className="flex items-center gap-3 mb-8">
@@ -64,7 +70,7 @@ const ScholarshipContactSection = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
               
-              {/* COLUMN 1: CAMPUS OFFICE (UPDATED) */}
+              {/* COLUMN 1: CAMPUS OFFICE */}
               <div className="space-y-6">
                 <h3 className="text-red-600 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
                     <span className="w-4 h-px bg-red-200"></span> Campus Office
@@ -83,37 +89,16 @@ const ScholarshipContactSection = () => {
                     </div>
                 </div>
 
-                {/* Key People - Campus Office (UPDATED HERE) */}
-                <div className="flex flex-col gap-3">
-                    
-                    {/* Mr. Jai Raja */}
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-600">
-                                <User size={14} />
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-900">Mr. Jai Raja</p>
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">Admission Manager</p>
-                            </div>
-                        </div>
-                        <span className="text-xs font-bold text-blue-600">+91 97898 85555</span>
+                {/* Phones */}
+                <div className="group flex items-start gap-4 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all">
+                    <div className="p-3 bg-blue-50 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      <Phone size={20} />
                     </div>
-
-                    {/* Mrs. Saranya B */}
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-600">
-                                <User size={14} />
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-900">Mrs. Saranya B</p>
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">Admission Co-ordinator</p>
-                            </div>
-                        </div>
-                        <span className="text-xs font-bold text-blue-600">+91 78240 80621</span>
+                    <div className="text-sm text-gray-600 space-y-1.5 font-medium">
+                        <p className="hover:text-blue-600 transition-colors cursor-pointer">+ 044 - 6903 4444</p>
+                        <p className="hover:text-blue-600 transition-colors cursor-pointer">+ 044 - 2747 4671</p>
+                        <p className="hover:text-blue-600 transition-colors cursor-pointer">+ 044 - 2747 5249</p>
                     </div>
-
                 </div>
 
                 {/* Email */}
@@ -146,14 +131,43 @@ const ScholarshipContactSection = () => {
 
                 {/* Admission Contacts */}
                 <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                     <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
                         <Mail size={14} className="text-gray-400"/>
                         <span className="text-xs font-semibold text-gray-700">admissions@hcaschennai.edu.in</span>
-                      </div>
-                      <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                     </div>
+                     <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
                         <Phone size={14} className="text-gray-400"/>
                         <span className="text-xs font-semibold text-gray-700">+ 044 - 2446 9714 / 9715</span>
-                      </div>
+                     </div>
+                </div>
+
+                {/* Key People */}
+                <div className="grid grid-cols-1 gap-3">
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+                                <User size={14} />
+                            </div>
+                            <div>
+                                <p className="text-xs font-bold text-gray-900">Mr. Jai Raja</p>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase">Manager</p>
+                            </div>
+                        </div>
+                        <span className="text-xs font-bold text-blue-600">+91 97898 85555</span>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+                                <User size={14} />
+                            </div>
+                            <div>
+                                <p className="text-xs font-bold text-gray-900">Dr. Senthamizh Selvi</p>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase">Co-ordinator</p>
+                            </div>
+                        </div>
+                        <span className="text-xs font-bold text-blue-600">+91 78240 80621</span>
+                    </div>
                 </div>
 
               </div>
@@ -162,20 +176,20 @@ const ScholarshipContactSection = () => {
 
           {/* HOURS FOOTER */}
           <div className="mt-10 pt-8 border-t border-gray-200">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-gray-400 text-xs font-bold uppercase tracking-widest">
-                     <Clock size={14} /> Office Hours
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-4">
-                     <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-800 rounded-full text-xs font-bold">
-                         <span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> Mon - Fri: 09:00 AM - 05:00 PM
-                     </div>
-                     <div className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-800 rounded-full text-xs font-bold">
-                         <span className="w-1.5 h-1.5 rounded-full bg-red-600" /> Sat - Sun: 10:00 AM - 03:00 PM
-                     </div>
-                  </div>
-              </div>
+             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                 <div className="flex items-center gap-2 text-gray-400 text-xs font-bold uppercase tracking-widest">
+                    <Clock size={14} /> Office Hours
+                 </div>
+                 
+                 <div className="flex flex-wrap gap-4">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-800 rounded-full text-xs font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-600" /> Mon - Fri: 09:00 AM - 05:00 PM
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-800 rounded-full text-xs font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-600" /> Sat - Sun: 10:00 AM - 03:00 PM
+                    </div>
+                 </div>
+             </div>
           </div>
 
         </div>

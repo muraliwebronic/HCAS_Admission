@@ -8,6 +8,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Sparkles,
+  ArrowRight,
+  ShieldCheck,
 } from "lucide-react";
 
 const AdmissionEligibility = () => {
@@ -33,6 +35,7 @@ const AdmissionEligibility = () => {
       description: "Must hold a Bachelor's Degree:",
       points: [
         "All Under Graduate degree examinations conducted by recognized Universities.",
+        "Provisional certificate required for admission.", // Added to balance content
       ],
     },
     {
@@ -41,7 +44,10 @@ const AdmissionEligibility = () => {
       theme: "emerald",
       icon: ScrollText,
       description: "Advanced research aspirants:",
-      points: ["Successfully completed a PG degree in the relevant subject."],
+      points: [
+        "Successfully completed a PG degree in the relevant subject.",
+        "Minimum 55% marks in Master's Degree.", // Added to balance content
+      ],
     },
   ];
 
@@ -56,176 +62,159 @@ const AdmissionEligibility = () => {
   ];
 
   return (
-    <section className="relative shadow-inner py-20 px-4 md:px-8 font-sans overflow-hidden bg-gray-50 flex flex-col items-center justify-center">
-      {/* --- BACKGROUND AMBIENCE (Matching Previous Components) --- */}
+    <section className="relative py-20 px-4 md:px-8 font-sans overflow-hidden bg-gray-50 flex flex-col items-center justify-center">
+      
+      {/* --- BACKGROUND AMBIENCE --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[120px] mix-blend-multiply animate-pulse-slow" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[120px] mix-blend-multiply" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-red-100/50 rounded-full blur-[100px] mix-blend-multiply" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
+        
         {/* --- HEADER --- */}
         <div className="text-center mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-blue-600/80 mb-2">
-            <Sparkles size={14} />
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold">
-              Guidelines
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 text-blue-700 border border-blue-200 mb-2">
+            <ShieldCheck size={14} />
+            <span className="text-[10px] uppercase tracking-widest font-bold">
+              Official Guidelines
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 font-serif leading-tight">
-            Admission{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              Eligibility
-            </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight tracking-tight">
+            Admission <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Eligibility</span>
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm tracking-wide">
-            Ensure you meet the academic criteria for admission to Hindustan College of Arts & Science
+          <p className="text-gray-500 max-w-2xl mx-auto text-sm font-medium">
+            Review the academic criteria required to join our programs.
           </p>
         </div>
 
-        {/* --- CARDS GRID (Glassmorphism Style) --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12 items-stretch">
+        {/* --- BALANCED CARDS GRID --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           {programData.map((item, index) => {
-            // Dynamic Color Logic
-            const colorStyles =
-              item.theme === "red"
-                ? "from-red-50 to-white border-red-100 group-hover:border-red-200"
-                : item.theme === "emerald"
-                ? "from-emerald-50 to-white border-emerald-100 group-hover:border-emerald-200"
-                : "from-blue-50 to-white border-blue-100 group-hover:border-blue-200";
-
-            const iconBg =
-              item.theme === "red"
-                ? "bg-red-100 text-red-600"
-                : item.theme === "emerald"
-                ? "bg-emerald-100 text-emerald-600"
-                : "bg-blue-100 text-blue-600";
-
-            const checkColor =
-              item.theme === "red"
-                ? "text-red-500"
-                : item.theme === "emerald"
-                ? "text-emerald-500"
-                : "text-blue-500";
+            
+            // Theme Styles
+            const isRed = item.theme === "red";
+            const isEmerald = item.theme === "emerald";
+            
+            const accentColor = isRed ? "text-red-600" : isEmerald ? "text-emerald-600" : "text-blue-600";
+            const bgHover = isRed ? "hover:border-red-200 hover:shadow-red-500/10" : isEmerald ? "hover:border-emerald-200 hover:shadow-emerald-500/10" : "hover:border-blue-200 hover:shadow-blue-500/10";
+            const iconBg = isRed ? "bg-red-50 text-red-600" : isEmerald ? "bg-emerald-50 text-emerald-600" : "bg-blue-50 text-blue-600";
+            const gradientBg = isRed ? "from-red-50" : isEmerald ? "from-emerald-50" : "from-blue-50";
 
             return (
               <div
                 key={index}
-                className={`group relative flex flex-col p-8 rounded-3xl transition-all duration-500
-                            bg-white/60 backdrop-blur-xl border ${colorStyles}
-                            shadow-lg shadow-gray-200/40 hover:shadow-2xl hover:-translate-y-2`}
+                className={`group relative flex flex-col justify-between h-full p-8 rounded-[2rem] bg-white border border-gray-100 shadow-xl shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1 ${bgHover} overflow-hidden`}
               >
-                {/* Header Section */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center ${iconBg} shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
-                  >
-                    <item.icon size={28} />
+                {/* 1. Large Watermark (Fills Empty Space) */}
+                <div className={`absolute -bottom-6 -right-6 opacity-[0.03] transition-transform duration-500 group-hover:scale-110 group-hover:opacity-[0.06] pointer-events-none text-gray-900`}>
+                   <item.icon size={180} />
+                </div>
+
+                {/* 2. Top Gradient Fade */}
+                <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-b ${gradientBg} to-transparent opacity-30 group-hover:opacity-60 transition-opacity`} />
+
+                {/* --- CONTENT START --- */}
+                <div className="relative z-10">
+                  
+                  {/* Icon & Title */}
+                  <div className="flex flex-col gap-4 mb-6">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${iconBg} shadow-sm group-hover:scale-105 transition-transform duration-300`}>
+                      <item.icon size={32} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 leading-none mb-1">
+                        {item.title}
+                      </h3>
+                      <p className={`text-xs font-bold uppercase tracking-wider opacity-70 ${accentColor}`}>
+                        {item.subtitle}
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Divider */}
+                  <div className="h-px w-full bg-gray-100 mb-6"></div>
+
+                  {/* List */}
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 leading-none">
-                      {item.title}
-                    </h3>
-                    <span className="text-xs font-bold uppercase tracking-wider opacity-60">
-                      {item.subtitle}
-                    </span>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
+                      Requirements
+                    </p>
+                    <ul className="space-y-4">
+                      {item.points.map((point, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 font-medium leading-relaxed">
+                          <CheckCircle2 className={`w-5 h-5 shrink-0 ${accentColor} opacity-80`} />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
-                {/* Content */}
-                <p className="text-sm text-gray-500 mb-6 italic border-l-2 border-gray-200 pl-3">
-                  {item.description}
-                </p>
+                {/* --- FOOTER ACTION (Anchors the layout) --- */}
+                <div className="relative z-10 mt-8 pt-6 border-t border-gray-50">
+                   <button className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold transition-all duration-300 ${isRed ? 'bg-red-50 text-red-700 hover:bg-red-100' : isEmerald ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'}`}>
+                      View Courses
+                      <ArrowRight size={16} />
+                   </button>
+                </div>
 
-                <ul className="space-y-3 mt-auto">
-                  {item.points.map((point, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed group/list"
-                    >
-                      <CheckCircle2
-                        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${checkColor} opacity-70 group-hover/list:opacity-100 transition-opacity`}
-                      />
-                      <span className="group-hover/list:text-gray-900 transition-colors">
-                        {point}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Decorative Gradient on Hover */}
-                <div
-                  className={`absolute inset-0 rounded-3xl bg-gradient-to-b ${
-                    item.theme === "red"
-                      ? "from-red-50/0 via-transparent to-red-50/30"
-                      : item.theme === "emerald"
-                      ? "from-emerald-50/0 via-transparent to-emerald-50/30"
-                      : "from-blue-50/0 via-transparent to-blue-50/30"
-                  } opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
-                />
               </div>
             );
           })}
         </div>
 
-        {/* --- OFFICIAL REQUIREMENTS (Static Panel Theme) --- */}
-        {/* Using the Dark Blue Gradient Style from 'Post Graduate' static panel for consistency */}
-        <div className="relative w-full overflow-hidden rounded-3xl shadow-[0_20px_50px_-12px_rgba(30,58,138,0.4)] group bg-blue-950 transition-all duration-500 hover:shadow-[0_30px_60px_-12px_rgba(30,58,138,0.5)]">
-          {/* Background Layers */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-950"></div>
-          <div className="absolute inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+        {/* --- IMPORTANT NOTICE SECTION --- */}
+        <div className="relative w-full rounded-3xl overflow-hidden bg-blue-950 shadow-2xl group">
+          
+          {/* Backgrounds */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-slate-900 z-0"></div>
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[80px] z-0 pointer-events-none"></div>
 
-          <div className="relative z-10 flex flex-col md:flex-row p-8 md:p-12 gap-10">
-            {/* Left: Title Area */}
-            <div className="md:w-1/3 flex flex-col justify-between border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 md:pr-8">
-              <div>
-                <div className="flex items-center gap-2 text-blue-200 mb-2">
-                  <AlertCircle size={20} />
-                  <span className="text-xs font-bold uppercase tracking-widest">
-                    Important Notice
-                  </span>
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white font-serif leading-tight mb-4">
-                  University of Madras <br />{" "}
-                  <span className="text-blue-300">Eligibility Certificate</span>
-                </h3>
-                <p className="text-blue-100/70 text-sm leading-relaxed">
-                  Mandatory verification requirement for students from
-                  non-standard boards or specific educational patterns.
-                </p>
-              </div>
-              <div className="mt-8 hidden md:block">
-                <button className="px-6 py-3 rounded-full bg-white text-blue-900 text-xs font-bold uppercase tracking-wider hover:bg-blue-50 transition-colors shadow-lg">
-                  Read Guidelines
-                </button>
-              </div>
-            </div>
-
-            {/* Right: List Area */}
-            <div className="md:w-2/3">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                {certificateRules.map((rule, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 group/rule"
-                  >
-                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-400 group-hover/rule:bg-white flex-shrink-0 transition-colors shadow-[0_0_8px_rgba(96,165,250,0.6)]" />
-                    <p className="text-sm text-blue-100/80 leading-relaxed group-hover/rule:text-white transition-colors">
-                      {rule}
-                    </p>
+          <div className="relative z-10 flex flex-col md:flex-row">
+            
+            {/* Left Panel: Header */}
+            <div className="md:w-1/3 p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between relative overflow-hidden">
+               {/* Shine Effect */}
+               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+               
+               <div>
+                  <div className="flex items-center gap-2 text-blue-300 mb-3">
+                    <AlertCircle size={18} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Mandatory</span>
                   </div>
-                ))}
-              </div>
-              <div className="mt-8 md:hidden">
-                <button className="w-full px-6 py-3 rounded-xl bg-white text-blue-900 text-sm font-bold hover:bg-blue-50 transition-colors shadow-lg">
-                  Read Guidelines
-                </button>
-              </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-4 tracking-tight">
+                    University of Madras <br/>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Eligibility Certificate</span>
+                  </h3>
+                  <p className="text-blue-200/60 text-sm leading-relaxed font-medium">
+                     Required verification for students from non-standard boards or specific patterns.
+                  </p>
+               </div>
+               
+               <div className="mt-8">
+                  <div className="w-12 h-1 bg-blue-500 rounded-full"></div>
+               </div>
             </div>
+
+            {/* Right Panel: Rules List */}
+            <div className="md:w-2/3 p-8 md:p-12 bg-white/5 backdrop-blur-sm">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                  {certificateRules.map((rule, index) => (
+                    <div key={index} className="flex items-start gap-3 group/rule">
+                       <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 group-hover/rule:bg-white shrink-0 transition-colors shadow-[0_0_8px_rgba(96,165,250,0.8)]"></div>
+                       <p className="text-sm text-blue-100/80 leading-relaxed group-hover/rule:text-white transition-colors font-medium">
+                         {rule}
+                       </p>
+                    </div>
+                  ))}
+               </div>
+            </div>
+
           </div>
         </div>
+
       </div>
     </section>
   );

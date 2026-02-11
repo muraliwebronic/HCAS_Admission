@@ -1,24 +1,30 @@
-import AboutCollege from "@/components/about/AboutCollege";
-import AdmissionEligibility from "@/components/about/AdmissionEligibility";
-import { PlacementSection } from "@/components/about/PlacementSection";
-import AcademicsPage from "@/components/home/Acadamic";
-import {
-  AccreditationSection,
-  WhyHCASSection,
-} from "@/components/home/AccreditationSection";
-import RankingAccreditation from "@/components/home/RankingAccreditation";
-import ScholarshipContactSection from "@/components/home/ScholarshipContactSection";
-import Footer from "@/components/layout/Footer";
+
 import React from "react";
-import LoginPage from "./login/page";
+import dynamic from "next/dynamic";
+
+// Dynamic Imports
+const LoginPage = dynamic(() => import("./login/page"));
+const AcademicsPage = dynamic(() => import("@/components/home/Acadamic"));
+const AdmissionEligibility = dynamic(() => import("@/components/about/AdmissionEligibility"));
+const AboutCollege = dynamic(() => import("@/components/about/AboutCollege"));
+const ScholarshipContactSection = dynamic(() => import("@/components/home/ScholarshipContactSection"));
+const RankingAccreditation = dynamic(() => import("@/components/home/RankingAccreditation"));
+const PlacementSection = dynamic(() => import("@/components/about/PlacementSection").then(mod => mod.PlacementSection));
+const Footer = dynamic(() => import("@/components/layout/Footer"));
+
+// Named exports from AccreditationSection
+const AccreditationSection = dynamic(() => import("@/components/home/AccreditationSection").then(mod => mod.AccreditationSection));
+const WhyHCASSection = dynamic(() => import("@/components/home/AccreditationSection").then(mod => mod.WhyHCASSection));
+
 
 export default function page() {
   return (
     <>
-     <LoginPage />
+      <LoginPage />
       <AcademicsPage />
       <AdmissionEligibility />
       <AboutCollege />
+
       <ScholarshipContactSection />
       <AccreditationSection />
       <WhyHCASSection />

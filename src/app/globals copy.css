@@ -1,23 +1,4 @@
-/* 1. Import Google Fonts (Poppins Only) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 @import "tailwindcss";
-
-/* 2. Configure Tailwind v4 Theme */
-@theme {
-  /* FIX: Added "sans-serif" after the comma */
-  --font-sans: "Poppins", sans-serif;
-  
-  /* FIX: Added "sans-serif" here too */
-  --font-serif: "Poppins", sans-serif;
-}
-
-/* 3. Global Reset */
-body {
-  font-family: var(--font-sans);
-}
-
-/* --- Animations & Utilities (Unchanged) --- */
 
 @keyframes fadeInUp {
   from {
@@ -32,8 +13,9 @@ body {
 .animate-fade-in-up {
   animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
-/* Custom Scrollbar */
+.animate-pulse-slow {
+  animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
@@ -47,6 +29,10 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
 }
+
+/* .animate-pulse-slow {
+            animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        } */
 
 @keyframes float {
   0%,
@@ -80,13 +66,6 @@ body {
 .animate-shimmer {
   animation: shimmer 1.5s infinite;
 }
-
-/* Pulse Animation Logic */
-@keyframes pulse {
-  50% {
-    opacity: .5;
-  }
-}
 .animate-pulse-slow {
   animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -94,3 +73,4 @@ body {
 .perspective-1000 {
   perspective: 1000px;
 }
+
