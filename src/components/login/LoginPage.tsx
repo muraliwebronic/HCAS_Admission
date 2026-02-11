@@ -11,7 +11,7 @@ export default function LoginPage() {
     <div 
       className="relative min-h-screen w-full overflow-hidden font-sans bg-gray-900 bg-cover bg-center"
       style={{
-        backgroundImage: "url('./images/Home-Slider4.webp')"
+        backgroundImage: "url('/images/Home-Slider4.webp')"
       }}
     >
       {/* Dark Overlay for the background image */}

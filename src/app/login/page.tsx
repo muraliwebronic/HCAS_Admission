@@ -35,7 +35,7 @@ export default function EnquiryPage() {
             {/* Background Image (Fixed) */}
             <div 
                 className="absolute hidden md:block  inset-0 z-0 bg-cover bg-center  "
-                style={{ backgroundImage: "url('./images/Home-Slider4.webp')" }}
+                style={{ backgroundImage: "url('/images/Home-Slider4.webp')" }}
             />
 
             {/* Dark Overlay for better contrast */}

@@ -118,7 +118,7 @@ export const WhyHCASSection: React.FC = () => {
                     <div className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gray-100 group-hover:bg-white transition-colors duration-500" onClick={() => setIsPlaying(true)}>
                         
                         {/* Background Image / Placeholder */}
-                        <div className="absolute inset-0 bg-[url('./images/Home-Slider4.webp')] bg-cover bg-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                        <div className="absolute inset-0 bg-[url('/images/Home-Slider4.webp')] bg-cover bg-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
                         <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/10 transition-colors" />
                         
                         {/* Play Button */}
