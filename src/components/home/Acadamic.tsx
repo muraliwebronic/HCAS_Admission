@@ -10,12 +10,12 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
   const Icon = data.icon || BookOpen;
   const isRed = data.theme === 'red';
 
-  // 1. Professional Deep Gradients
-  const bgTheme = isRed 
-    ? 'bg-gradient-to-br from-rose-950 via-red-950 to-neutral-900' 
-    : 'bg-gradient-to-br from-slate-900 via-blue-950 to-neutral-900';
+  // Base background and shadow classes matching the old HTML
+  const containerClasses = isRed
+    ? 'bg-red-950 shadow-[0_20px_50px_-12px_rgba(185,28,28,0.5)]'
+    : 'bg-blue-950 shadow-[0_20px_50px_-12px_rgba(30,58,138,0.5)]';
 
-  // 2. Accent Colors (Applied only on Desktop Hover)
+  // Accent Colors for list items (Applied only on Desktop Hover)
   const accentBorder = isRed ? 'lg:group-hover:border-red-500/30' : 'lg:group-hover:border-blue-500/30';
   const accentGlow = isRed ? 'lg:group-hover:from-red-900/20' : 'lg:group-hover:from-blue-900/20';
 
@@ -24,8 +24,8 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
       w-full relative z-20 
       rounded-3xl overflow-hidden 
       flex flex-col 
-      shadow-2xl border border-white/5
-      ${bgTheme}
+      transition-all duration-300 hover:shadow-2xl group
+      ${containerClasses}
       
       /* MOBILE FIX: Auto height allows natural page scrolling */
       h-auto
@@ -33,78 +33,69 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
       /* DESKTOP (PC): Keep original fixed height and scroll logic */
       lg:h-full lg:min-h-[500px] lg:max-h-[600px]
     `}>
-      
-      {/* --- BACKGROUND DECORATION --- */}
-      <div className="absolute -right-20 -bottom-20 opacity-[0.03] pointer-events-none select-none">
-        <GraduationCap size={400} />
-      </div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[100px] pointer-events-none mix-blend-overlay" />
 
-      {/* --- CONTENT --- */}
-      <div className="relative z-10 flex flex-col h-full">
-        
+      {/* --- BACKGROUND LAYER (Matches Old HTML) --- */}
+      {isRed ? (
+        // Red Theme: Gradient Background
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-700 via-red-600 to-red-800" />
+      ) : (
+        // Blue Theme: Image + Overlay
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="/images/pg-text.png"
+            alt="Texture"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-50 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-900 via-indigo-800 to-blue-950 opacity-90 mix-blend-multiply" />
+        </div>
+      )}
+
+      {/* Common Overlay (from Old HTML: bg-white/5 pointer-events-none z-10) */}
+      <div className="absolute inset-0 bg-white/5 pointer-events-none z-10" />
+
+      {/* --- CONTENT (z-20) --- */}
+      <div className="relative z-20 flex flex-col h-full">
+
         {/* HEADER */}
-        <div className="p-6 md:p-8 border-b border-white/5 backdrop-blur-sm bg-black/10">
-          <div className="flex items-center gap-3 mb-4">
-            <span className={`
-              px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10
-              ${isRed ? 'bg-red-500/10 text-red-200' : 'bg-blue-500/10 text-blue-200'}
-            `}>
-              Quick Links
-            </span>
+        <div className="p-6 md:p-8 border-b border-white/20"> {/* Changed border-white/5 to border-white/20 to match old HTML */}
+          <div className="flex items-center gap-2 text-white/80 mb-1">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Academics</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-none">
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-serif text-white">
             {data.title}
           </h2>
         </div>
 
         {/* LIST SECTION */}
         {/* Mobile: No overflow-y-auto (lets page scroll). Desktop: overflow-y-auto (internal scroll) */}
-        <div className="flex-1 p-6 lg:overflow-y-auto custom-scrollbar">
-          <ul className="flex flex-col gap-1 lg:gap-2">
+        <div className="flex-1 p-6 lg:overflow-y-auto custom-scrollbar pr-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 content-start"> {/* Changed from flex-col to grid to match old HTML layout */}
             {data.staticList.map((program, index) => (
               <li key={index}>
                 <Link
                   href={program.link}
                   className={`
-                    group relative flex items-center justify-between w-full transition-all duration-300 ease-out
-                    
-                    /* --- MOBILE DESIGN (Clean List) --- */
-                    py-3 px-1 border-b border-white/10 bg-transparent
-                    
-                    /* --- DESKTOP DESIGN (Card Style) --- */
-                    lg:p-4 lg:rounded-xl lg:border lg:border-white/5 lg:bg-white/[0.02]
-                    lg:hover:bg-white/[0.05] lg:hover:pl-6
-                    ${accentBorder}
+                    flex items-start gap-2 group/item cursor-pointer hover:bg-white/10 p-1.5 rounded-lg transition-colors
                   `}
                 >
-                  {/* Hover Glow (Desktop Only) */}
-                  <div className={`hidden lg:block absolute inset-0 rounded-xl bg-gradient-to-r to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${accentGlow} from-white/5`} />
+                  {/* Dot Indicator */}
+                  <div className={`mt-1.5 w-1.5 h-1.5 rounded-full ${isRed ? 'bg-red-300' : 'bg-blue-300'} group-hover/item:bg-white flex-shrink-0 shadow-[0_0_5px_rgba(255,255,255,0.8)]`} />
 
                   {/* Text */}
-                  <span className="relative z-10 text-sm font-medium text-white/80 lg:text-gray-400 lg:group-hover:text-white transition-colors duration-300">
+                  <span className="text-[10px] lg:text-[11px] font-medium leading-tight text-white/80 group-hover/item:text-white transition-colors uppercase">
                     {program.label}
                   </span>
-                  
-                  {/* Icon */}
-                  <div className="relative z-10 flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 rounded-full lg:bg-white/5 lg:border lg:border-white/5 lg:group-hover:border-white/20 transition-colors">
-                    <ArrowRight 
-                      size={14} 
-                      className="text-white/60 lg:text-gray-500 group-hover:text-white transition-colors" 
-                    />
-                  </div>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* FOOTER */}
-        <div className="p-4 border-t border-white/5 bg-black/20 text-center">
-           <p className="text-[10px] text-gray-500 font-medium">
-             {data.staticList.length} Programs Available
-           </p>
-        </div>
+        {/* Old HTML Bottom Icon Decoration */}
+        <GraduationCap
+          className="absolute -bottom-10 -right-6 w-64 h-64 text-black opacity-[0.1] rotate-[-20deg] pointer-events-none"
+        />
 
       </div>
 
@@ -115,14 +106,14 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
             width: 4px;
           }
           .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.05); /* Match old HTML track color */
           }
           .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2); /* Match old HTML thumb color */
             border-radius: 10px;
           }
           .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.4); /* Match old HTML hover color */
           }
         }
       `}</style>
@@ -200,7 +191,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
                 <div className="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between">
                   <span className={`text-[10px] md:text-xs font-bold text-gray-400 ${accentText} transition-colors uppercase tracking-wide`}>Apply Now</span>
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gray-50 ${accentBg} group-hover:text-white transition-all`}>
-                     <ArrowRight size={12} className="opacity-50 group-hover:opacity-100 -ml-0.5" />
+                    <ArrowRight size={12} className="opacity-50 group-hover:opacity-100 -ml-0.5" />
                   </div>
                 </div>
               </div>
@@ -229,7 +220,7 @@ export default function AcademicsPage() {
     <main className="w-full bg-white overflow-hidden">
       {programsData.map((section) => (
         <section key={section.id} className="relative bg-white flex items-center justify-center p-4 lg:p-10 lg:pt-32 border-b border-gray-100 last:border-0">
-          
+
           {/* Ambient Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
