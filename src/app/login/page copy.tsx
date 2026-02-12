@@ -24,7 +24,7 @@ export default function EnquiryPage() {
         <div
             className="relative min-h-screen w-full bg-gray-900 bg-cover bg-center font-sans flex flex-col lg:flex-row"
             style={{
-                backgroundImage: "url('./images/Home-Slider4.webp')"
+                backgroundImage: "url('/images/Home-Slider4.webp')"
             }}
         >
             {/* Dark Overlay - Fixed to cover scrolling area */}

@@ -35,7 +35,7 @@ export const LOGOS: LogoItem[] = [
   {
     name: "NAAC",
     // Matches the file named 'images' which is the NAAC logo
-    src: "./hcas-images/partners./images.jpeg",
+    src: "./hcas-images/partners/images.jpeg",
     alt: "NAAC Accreditation",
   },
   {
