@@ -21,13 +21,14 @@ const Footer = () => {
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           <div className="flex flex-col justify-start">
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex flex-col items-start gap-4 mb-6">
               {/* --- LOGO REPLACEMENT --- */}
               <img
                 src="./hcas-images/HCAS.png"
                 alt="HCAS Logo"
                 className="object-contain h-14 rounded-2xl"
               />
+
               <div>
                 <h2 className="text-2xl font-serif font-bold tracking-wide text-white leading-none mb-1">
                   HINDUSTAN
@@ -36,6 +37,7 @@ const Footer = () => {
                   College of Arts & Science
                 </p>
               </div>
+
             </div>
             <p className="text-blue-100/60 text-sm leading-relaxed mb-8 border-l-2 border-red-600 pl-4">
               A Unit of Hindustan Group of Institutions, affiliated to the University of Madras and is

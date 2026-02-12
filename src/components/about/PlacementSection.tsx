@@ -156,12 +156,12 @@ export const PlacementSection = () => {
         </div>
 
         {/* --- VIEW ALL BUTTON --- */}
-        <div className="mt-12 text-center">
+        <a href='https://hcaschennai.edu.in/placement/' className="mt-12 block text-center">
           <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl transition-all duration-300 group">
             View All Placements
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </button>
-        </div>
+        </a>
 
       </div>
 

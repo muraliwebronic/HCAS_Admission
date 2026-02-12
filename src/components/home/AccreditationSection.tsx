@@ -35,7 +35,7 @@ export const AccreditationSection: React.FC = () => {
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
-            Our{" "}
+            Our
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">
               Accreditations
             </span>
@@ -89,7 +89,6 @@ export const WhyHCASSection: React.FC = () => {
 
   return (
     <section className="relative py-20 lg:py-28 bg-gray-50 overflow-hidden text-gray-900">
-
       {/* Background Layers */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
@@ -98,34 +97,48 @@ export const WhyHCASSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-
         {/* Mobile Header (Shown only on small screens) */}
         <div className="lg:hidden text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-blue-100/50 text-blue-700 px-3 py-1 rounded-full border border-blue-200 mb-3">
             <Star size={14} fill="currentColor" />
-            <span className="text-[10px] font-bold uppercase tracking-widest">Why Choose Us</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">
+              Why Choose Us
+            </span>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 leading-tight">Why Choose HCAS?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 leading-tight">
+            Why Choose HCAS?
+          </h2>
         </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-
           {/* --- LEFT: VIDEO PLAYER (Sticky on Desktop) --- */}
           <div className="w-full lg:w-1/2 relative">
             <div className="relative w-full aspect-[4/3] lg:aspect-square max-h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 border border-white bg-white group">
-
               {!isPlaying ? (
-                <div className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gray-100 group-hover:bg-white transition-colors duration-500" onClick={() => setIsPlaying(true)}>
-
+                <div
+                  className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center bg-gray-100 group-hover:bg-white transition-colors duration-500"
+                  onClick={() => setIsPlaying(true)}
+                >
                   {/* Background Image / Placeholder */}
-                  <div className="absolute inset-0 bg-[url('/images/Home-Slider4.webp')] bg-cover bg-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div
+                    className="absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                    style={{
+                      backgroundImage: "url('./images/Home-Slider4.webp')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  />
                   <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/10 transition-colors" />
 
                   {/* Play Button */}
                   <div className="relative z-20">
                     <div className="absolute inset-0 bg-white/30 rounded-full animate-ping"></div>
                     <div className="relative w-20 h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="ml-1 text-blue-600 fill-blue-600" size={32} />
+                      <Play
+                        className="ml-1 text-blue-600 fill-blue-600"
+                        size={32}
+                      />
                     </div>
                   </div>
 
@@ -153,16 +166,19 @@ export const WhyHCASSection: React.FC = () => {
 
           {/* --- RIGHT: FEATURES LIST --- */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
-
             {/* Desktop Header */}
             <div className="hidden lg:block mb-10">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100 mb-4">
                 <Star size={14} fill="currentColor" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Trusted Expertise</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">
+                  Trusted Expertise
+                </span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-[1.1] tracking-tight">
                 Excellence in <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">Education & Beyond</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">
+                  Education & Beyond
+                </span>
               </h2>
             </div>
 
@@ -185,7 +201,10 @@ export const WhyHCASSection: React.FC = () => {
                         {feature.title}
                       </h3>
                       {/* Tiny Arrow for interaction hint */}
-                      <ArrowUpRight size={18} className="text-gray-300 group-hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      <ArrowUpRight
+                        size={18}
+                        className="text-gray-300 group-hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                      />
                     </div>
                     <p className="text-sm text-gray-500 leading-relaxed mt-1 group-hover:text-gray-600">
                       {feature.description}
@@ -198,21 +217,26 @@ export const WhyHCASSection: React.FC = () => {
             {/* Stats Row */}
             <div className="mt-10 flex items-center gap-8 pt-8 border-t border-gray-200">
               <div className="flex flex-col">
-                <span className="text-4xl font-black text-gray-900 tracking-tight">28+</span>
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Years of Excellence</span>
+                <span className="text-4xl font-black text-gray-900 tracking-tight">
+                  28+
+                </span>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">
+                  Years of Excellence
+                </span>
               </div>
               <div className="w-px h-10 bg-gray-200"></div>
               <div className="flex flex-col">
-                <span className="text-4xl font-black text-gray-900 tracking-tight">A</span>
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">NAAC Grade</span>
+                <span className="text-4xl font-black text-gray-900 tracking-tight">
+                  A
+                </span>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">
+                  NAAC Grade
+                </span>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </section>
   );
 };
