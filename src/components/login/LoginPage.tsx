@@ -33,7 +33,7 @@ export default function LoginPage() {
                 <GraduationCap className="text-white" size={28} />
               </div>
               <div>
-                <p className="text-xl lg:text-3xl font-bold font-serif tracking-wide text-white drop-shadow-md">Dear Applicant,</p>
+                <p className="text-xl lg:text-3xl font-bold font-sans tracking-wide text-white drop-shadow-md">Dear Applicant,</p>
                 <div className="flex items-center gap-3 mt-2">
                   <div className="h-0.5 w-8 bg-red-500 rounded-full"></div>
                   <p className="text-xs lg:text-sm font-bold text-blue-200 tracking-[0.15em] uppercase">
@@ -90,7 +90,7 @@ export default function LoginPage() {
             <div className="flex justify-center mb-2">
               <span className="bg-blue-50 text-blue-900 text-[10px] font-extrabold px-3 py-1 rounded-full border border-blue-100 uppercase tracking-widest">Login</span>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 font-serif mb-1">
+            <h1 className="text-3xl font-bold text-gray-900 font-sans mb-1">
               Welcome Back
             </h1>
             <p className="text-gray-500 text-xs font-medium">Please enter your credentials to access the portal.</p>
@@ -213,10 +213,10 @@ export default function LoginPage() {
           <Sparkles className="absolute -top-10 -right-8 text-yellow-400 opacity-90 animate-pulse" size={56} fill="currentColor" />
         </div>
 
-        {/* Subtitle with Serif & Elegance */}
+        {/* Subtitle with sans & Elegance */}
         <div className="mt-6 flex flex-col items-end gap-3">
           <div className="h-1.5 w-32 bg-gradient-to-l from-red-600 to-transparent rounded-full shadow-lg"></div>
-          <h2 className="text-4xl font-serif italic text-blue-50/90 tracking-wide font-light drop-shadow-lg">
+          <h2 className="text-4xl font-sans italic text-blue-50/90 tracking-wide font-light drop-shadow-lg">
             Be a <span className="font-semibold text-white not-italic">High Thinker</span> for Life.
           </h2>
         </div>

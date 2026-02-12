@@ -51,7 +51,7 @@ const AboutCollege = () => {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-red-600 mb-0.5">Established</p>
-                  <p className="text-3xl font-serif font-bold text-gray-800 leading-none">1995</p>
+                  <p className="text-3xl font-sans font-bold text-gray-800 leading-none">1995</p>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@ const AboutCollege = () => {
                 <span className="text-red-600 font-bold uppercase tracking-[0.2em] text-xs">Who We Are</span>
               </div>
 
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-[1.15] font-serif">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-[1.15] font-sans">
                 About The <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Institution</span>
               </h2>

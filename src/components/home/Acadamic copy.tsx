@@ -42,7 +42,7 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
             <Icon size={14} />
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Academics</span>
           </div>
-          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-serif text-white">{data.title}</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white">{data.title}</h2>
         </div>
 
         <div className={`grid ${data.staticList.length > 8 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'} gap-x-6 gap-y-3 content-start overflow-y-auto custom-scrollbar pr-2`}>

@@ -33,7 +33,7 @@ const RankingAccreditation = () => {
                                 </div>
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] font-serif">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] font-sans">
                                 Ranking & <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">Accreditations</span>
                             </h2>
@@ -81,12 +81,12 @@ const RankingAccreditation = () => {
                             {/* Stats / Cycles */}
                             <div className="flex gap-8">
                                 <div className="text-center">
-                                    <p className="text-4xl font-serif font-bold text-blue-900">4<span className="text-lg align-top text-blue-500">+</span></p>
+                                    <p className="text-4xl font-sans font-bold text-blue-900">4<span className="text-lg align-top text-blue-500">+</span></p>
                                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Cycles Completed</p>
                                 </div>
                                 <div className="w-px h-12 bg-gray-300"></div>
                                 <div className="text-center">
-                                    <p className="text-4xl font-serif font-bold text-blue-900">A</p>
+                                    <p className="text-4xl font-sans font-bold text-blue-900">A</p>
                                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Grade Awarded</p>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ const RankingAccreditation = () => {
                                 <div>
                                     <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-0.5">Accreditation</p>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-2xl font-bold text-gray-900 font-serif">Grade A</span>
+                                        <span className="text-2xl font-bold text-gray-900 font-sans">Grade A</span>
                                         <Sparkles size={16} className="text-yellow-500 fill-yellow-500 animate-pulse" />
                                     </div>
                                 </div>

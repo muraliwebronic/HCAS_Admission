@@ -83,7 +83,7 @@ export const PlacementSection = () => {
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
           <div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight font-serif">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight font-sans">
               Student <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Placements</span>
             </h2>
             <p className="text-blue-900/60 font-bold tracking-widest uppercase text-xs mt-2 flex items-center gap-2">
@@ -138,7 +138,7 @@ export const PlacementSection = () => {
 
               {/* 2. Content Overlay (Bottom) */}
               <div className="absolute bottom-0 left-0 w-full p-4 text-center text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-lg font-bold font-serif mb-0.5 text-white drop-shadow-md">
+                <h3 className="text-lg font-bold font-sans mb-0.5 text-white drop-shadow-md">
                   {student.name}
                 </h3>
                 <p className="text-[10px] text-gray-200 uppercase tracking-wider font-medium mb-3">

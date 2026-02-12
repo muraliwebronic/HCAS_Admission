@@ -26,7 +26,7 @@ const ScholarshipContactSection = () => {
               <GraduationCap size={18} />
               <span className="text-xs font-bold uppercase tracking-widest">Financial Aid</span>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 font-serif">Scholarships</h2>
+            <h2 className="text-3xl font-bold text-gray-900 font-sans">Scholarships</h2>
           </div>
 
           {/* TOP CARD (Banner) */}
@@ -42,7 +42,7 @@ const ScholarshipContactSection = () => {
                   <Sparkles size={16} className="text-yellow-400" />
                   <span className="text-xs font-bold uppercase tracking-widest">Merit Based</span>
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white font-serif mb-2">Scholarship Programs</h3>
+                <h3 className="text-2xl lg:text-3xl font-bold text-white font-sans mb-2">Scholarship Programs</h3>
                 <p className="text-blue-100/80 text-sm leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                   We offer various scholarships to meritorious and deserving students.
                 </p>
@@ -59,7 +59,7 @@ const ScholarshipContactSection = () => {
 
           <div className="flex items-center gap-3 mb-8">
             <div className="h-8 w-1 bg-red-600 rounded-full"></div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 font-serif">Contact Information</h2>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 font-sans">Contact Information</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">

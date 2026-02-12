@@ -30,7 +30,7 @@ const Footer = () => {
               />
 
               <div>
-                <h2 className="text-2xl font-serif font-bold tracking-wide text-white leading-none mb-1">
+                <h2 className="text-2xl font-sans font-bold tracking-wide text-white leading-none mb-1">
                   HINDUSTAN
                 </h2>
                 <p className="text-[10px] uppercase tracking-widest text-blue-300 font-bold">

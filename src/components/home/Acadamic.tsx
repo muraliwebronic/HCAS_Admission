@@ -62,7 +62,7 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
             <Sparkles className="w-3.5 h-3.5" />
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Academics</span>
           </div>
-          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-serif text-white">
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white">
             {data.title}
           </h2>
         </div>

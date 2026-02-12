@@ -83,7 +83,7 @@ const ScholarshipContactSection = () => {
 
           <div className="flex items-center gap-3 mb-8">
             <div className="h-8 w-1 bg-red-600 rounded-full" />
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl font-sans lg:text-3xl font-bold text-gray-900">
               Contact Information
             </h2>
           </div>

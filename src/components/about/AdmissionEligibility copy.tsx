@@ -73,7 +73,7 @@ const AdmissionEligibility = () => {
               Guidelines
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 font-serif leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 font-sans leading-tight">
             Admission{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
               Eligibility
@@ -92,22 +92,22 @@ const AdmissionEligibility = () => {
               item.theme === "red"
                 ? "from-red-50 to-white border-red-100 group-hover:border-red-200"
                 : item.theme === "emerald"
-                ? "from-emerald-50 to-white border-emerald-100 group-hover:border-emerald-200"
-                : "from-blue-50 to-white border-blue-100 group-hover:border-blue-200";
+                  ? "from-emerald-50 to-white border-emerald-100 group-hover:border-emerald-200"
+                  : "from-blue-50 to-white border-blue-100 group-hover:border-blue-200";
 
             const iconBg =
               item.theme === "red"
                 ? "bg-red-100 text-red-600"
                 : item.theme === "emerald"
-                ? "bg-emerald-100 text-emerald-600"
-                : "bg-blue-100 text-blue-600";
+                  ? "bg-emerald-100 text-emerald-600"
+                  : "bg-blue-100 text-blue-600";
 
             const checkColor =
               item.theme === "red"
                 ? "text-red-500"
                 : item.theme === "emerald"
-                ? "text-emerald-500"
-                : "text-blue-500";
+                  ? "text-emerald-500"
+                  : "text-blue-500";
 
             return (
               <div
@@ -156,13 +156,12 @@ const AdmissionEligibility = () => {
 
                 {/* Decorative Gradient on Hover */}
                 <div
-                  className={`absolute inset-0 rounded-3xl bg-gradient-to-b ${
-                    item.theme === "red"
+                  className={`absolute inset-0 rounded-3xl bg-gradient-to-b ${item.theme === "red"
                       ? "from-red-50/0 via-transparent to-red-50/30"
                       : item.theme === "emerald"
-                      ? "from-emerald-50/0 via-transparent to-emerald-50/30"
-                      : "from-blue-50/0 via-transparent to-blue-50/30"
-                  } opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+                        ? "from-emerald-50/0 via-transparent to-emerald-50/30"
+                        : "from-blue-50/0 via-transparent to-blue-50/30"
+                    } opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
                 />
               </div>
             );
@@ -187,7 +186,7 @@ const AdmissionEligibility = () => {
                     Important Notice
                   </span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white font-serif leading-tight mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-white font-sans leading-tight mb-4">
                   University of Madras <br />{" "}
                   <span className="text-blue-300">Eligibility Certificate</span>
                 </h3>
