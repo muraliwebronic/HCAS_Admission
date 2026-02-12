@@ -31,9 +31,9 @@ export default function EnquiryPage() {
 
     return (
         <div className="min-h-screen w-full flex max-md:bg-white overflow-hidden font-sans relative">
-            
+
             {/* Background Image (Fixed) */}
-            <div 
+            <div
                 className="absolute hidden md:block  inset-0 z-0 bg-cover bg-center  "
                 style={{ backgroundImage: "url('/images/Home-Slider4.webp')" }}
             />
@@ -72,20 +72,20 @@ export default function EnquiryPage() {
                     </div>
                 </div>
             )}
-            
+
             <div className="relative z-10 w-full max-w-[1920px] mx-auto flex flex-col lg:flex-row h-full min-h-screen">
 
                 {/* =========================================
                     1. LEFT SIDE: ROADMAP + INFO CONTENT
                    ========================================= */}
                 <div className="w-full lg:w-[45%] bg-blue-950 relative overflow-hidden flex flex-col justify-between p-8 lg:p-14 text-white shadow-2xl">
-                    
+
                     {/* Deep Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 z-0"></div>
-                    
+
                     {/* Abstract Shapes */}
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                    
+
                     {/* --- Content Top --- */}
                     <div className="relative z-10 space-y-8">
                         {/* Logo Area */}
@@ -93,7 +93,7 @@ export default function EnquiryPage() {
                             <div className="flex items-center gap-4">
                                 <div className=" h-14  bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
                                     <img
-                                        src="./hcas-images/HCAS.png"
+                                        src="/hcas-images/HCAS.png"
                                         alt="HCAS Logo"
                                         className="object-contain h-14 rounded-2xl"
                                     />
@@ -103,9 +103,9 @@ export default function EnquiryPage() {
                                     <p className="text-[10px] text-blue-200 uppercase tracking-[0.2em]">Excellence in Education</p>
                                 </div>
                             </div>
-                            
+
                             {/* Mobile Info Button */}
-                            <button 
+                            <button
                                 onClick={() => setIsNotesOpen(true)}
                                 className="lg:hidden p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"
                             >
@@ -116,7 +116,7 @@ export default function EnquiryPage() {
                         {/* --- Main Heading & Description --- */}
                         <div className="relative py-4">
                             <h1 className="text-5xl lg:text-7xl font-black leading-[0.9] tracking-tight text-white drop-shadow-2xl mb-6">
-                                Be a <br/>
+                                Be a <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-blue-300">
                                     HCASian
                                 </span>
@@ -139,8 +139,8 @@ export default function EnquiryPage() {
                             <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-blue-500/50 via-blue-500/20 to-transparent"></div>
 
                             {roadmapSteps.map((step, idx) => (
-                                <div 
-                                    key={idx} 
+                                <div
+                                    key={idx}
                                     className="group flex items-center gap-6 relative cursor-default"
                                     onMouseEnter={() => setActiveStep(idx)}
                                 >
@@ -151,7 +151,7 @@ export default function EnquiryPage() {
                                     `}>
                                         <step.icon size={16} />
                                     </div>
-                                    
+
                                     {/* Text */}
                                     <div className={`transition-all duration-300 ${idx <= activeStep ? 'opacity-100 translate-x-2' : 'opacity-40'}`}>
                                         <h4 className="font-bold text-lg">{step.title}</h4>
@@ -164,7 +164,7 @@ export default function EnquiryPage() {
 
                     {/* Desktop "Read More" Link */}
                     <div className="hidden lg:block relative z-10 pt-4">
-                        <button 
+                        <button
                             onClick={() => setIsNotesOpen(true)}
                             className="text-xs text-blue-300 hover:text-white flex items-center gap-2 transition-colors"
                         >
@@ -175,11 +175,11 @@ export default function EnquiryPage() {
                 </div>
 
 
-             
+
                 <div className="flex-1 flex items-center justify-center p-4 lg:p-12 relative">
-                    
+
                     <div className="w-full max-w-lg bg-white rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] border border-white/50 p-8 lg:p-10 relative overflow-hidden">
-                        
+
                         {/* Top Accent Line */}
                         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-800 via-blue-600 to-red-600"></div>
 
@@ -189,7 +189,7 @@ export default function EnquiryPage() {
                         </div>
 
                         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                            
+
                             {/* Inputs */}
                             <div className="group relative">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
@@ -231,13 +231,13 @@ export default function EnquiryPage() {
                                     ))}
                                 </select>
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
                                 </div>
                             </div>
 
                             {/* --- BUTTON SECTION FROM IMAGE --- */}
                             <div className="mt-8 space-y-5">
-                                
+
                                 {/* 1. Submit Enquiry (Blue Button) */}
                                 <button className="w-full bg-[#1a3696] hover:bg-blue-900 text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(26,54,150,0.39)] active:scale-[0.98] flex items-center justify-center gap-2 text-base transition-all duration-200">
                                     Submit Enquiry

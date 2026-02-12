@@ -3,9 +3,9 @@ import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, Scroll, BookOpen } 
 
 // --- ASSETS & CONFIG ---
 export const CAPS = {
-  green: "./images/greencap.png",
-  blue: "./images/bluecap.png",
-  red: "./images/redcap.png", // Added just in case, though not used in original
+  green: "/images/greencap.png",
+  blue: "/images/bluecap.png",
+  red: "/images/redcap.png", // Added just in case, though not used in original
 };
 
 // --- TYPES ---
@@ -117,7 +117,7 @@ export const programsData: SectionData[] = [
     theme: 'blue',
     layout: 'static-left',
     icon: Scroll,
-    bgImage: './images/sclor.jpg',
+    bgImage: '/images/sclor.jpg',
     staticList: [
       { label: 'PH.D BIOTECHNOLOGY', link: '#' },
       { label: 'PH.D COMMERCE', link: '#' },
