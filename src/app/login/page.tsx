@@ -78,13 +78,11 @@ export default function EnquiryPage() {
                 {/* =========================================
                     1. LEFT SIDE: ROADMAP + INFO CONTENT
                    ========================================= */}
-                <div className="w-full lg:w-[45%] bg-blue-950 relative overflow-hidden flex flex-col justify-between p-8 lg:p-14 text-white shadow-2xl">
+                <div className="w-full lg:w-[45%] bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900 relative overflow-hidden rounded-r-3xl flex flex-col justify-between p-8 lg:p-14 text-white shadow-2xl">
 
                     {/* Deep Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 z-0"></div>
 
                     {/* Abstract Shapes */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
                     {/* --- Content Top --- */}
                     <div className="relative z-10 space-y-8">

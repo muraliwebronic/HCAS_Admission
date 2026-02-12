@@ -166,18 +166,15 @@ const AdmissionEligibility = () => {
         </div>
 
         {/* --- IMPORTANT NOTICE SECTION --- */}
-        <div className="relative w-full rounded-3xl overflow-hidden bg-blue-950 shadow-2xl group">
+        <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900 shadow-2xl group">
           
           {/* Backgrounds */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-slate-900 z-0"></div>
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[80px] z-0 pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col md:flex-row">
             
             {/* Left Panel: Header */}
             <div className="md:w-1/3 p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between relative overflow-hidden">
                {/* Shine Effect */}
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                
                <div>
                   <div className="flex items-center gap-2 text-blue-300 mb-3">
