@@ -10,7 +10,7 @@ const PLACEMENTS = [
     course: "B.Sc Psychology",
     batch: "2024-2025",
     company: "Rinex",
-    image: "/hcas-images/students/NIDA-AMREEN-rinex.jpg",
+    image: "./hcas-images/students/NIDA-AMREEN-rinex.jpg",
     color: "blue"
   },
   {
@@ -18,7 +18,7 @@ const PLACEMENTS = [
     course: "B.COM BM",
     batch: "2024-2025",
     company: "Sutherland",
-    image: "/hcas-images/students/ADITYA-KUMAR-sutherland.jpg",
+    image: "./hcas-images/students/ADITYA-KUMAR-sutherland.jpg",
     color: "red"
   },
   {
@@ -26,7 +26,7 @@ const PLACEMENTS = [
     course: "B.SC CS",
     batch: "2024-2025",
     company: "TVS",
-    image: "/hcas-images/students/ANITHA.V-tvs.jpg",
+    image: "./hcas-images/students/ANITHA.V-tvs.jpg",
     color: "green"
   },
   {
@@ -34,7 +34,7 @@ const PLACEMENTS = [
     course: "B.Com (G)",
     batch: "2024-2025",
     company: "Elewayte",
-    image: "/hcas-images/students/SIDDARTH-P-elewayte.jpg",
+    image: "./hcas-images/students/SIDDARTH-P-elewayte.jpg",
     color: "purple"
   },
   {
@@ -42,7 +42,7 @@ const PLACEMENTS = [
     course: "B.Com (CS)",
     batch: "2024-2025",
     company: "ICICI",
-    image: "/hcas-images/students/NITHISH-AP-icici.jpg",
+    image: "./hcas-images/students/NITHISH-AP-icici.jpg",
     color: "orange"
   }
 ];

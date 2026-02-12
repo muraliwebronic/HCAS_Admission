@@ -42,7 +42,7 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
         // Blue Theme: Image + Overlay
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
-            src="/images/pg-text.png"
+            src="./images/pg-text.png"
             alt="Texture"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-50 mix-blend-overlay"
           />

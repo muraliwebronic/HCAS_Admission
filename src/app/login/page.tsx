@@ -35,7 +35,7 @@ export default function EnquiryPage() {
             {/* Background Image (Fixed) */}
             <div
                 className="absolute hidden md:block  inset-0 z-0 bg-cover bg-center  "
-                style={{ backgroundImage: "url('/images/Home-Slider4.webp')" }}
+                style={{ backgroundImage: "url('./images/Home-Slider4.webp')" }}
             />
 
             {/* Dark Overlay for better contrast */}
@@ -93,7 +93,7 @@ export default function EnquiryPage() {
                             <div className="flex items-center gap-4">
                                 <div className=" h-14  bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
                                     <img
-                                        src="/hcas-images/HCAS.png"
+                                        src="./hcas-images/HCAS.png"
                                         alt="HCAS Logo"
                                         className="object-contain h-14 rounded-2xl"
                                     />

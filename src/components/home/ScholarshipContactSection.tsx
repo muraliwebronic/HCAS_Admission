@@ -32,7 +32,7 @@ const ScholarshipContactSection = () => {
           {/* TOP CARD (Banner) */}
           <div className="relative h-[300px] lg:h-auto lg:flex-[3] rounded-[2rem] overflow-hidden group shadow-2xl shadow-blue-900/10">
             <img
-              src="/images/sclor.jpg"
+              src="./images/sclor.jpg"
               alt="Scholarship Opportunities"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />

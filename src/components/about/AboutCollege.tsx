@@ -34,7 +34,7 @@ const AboutCollege = () => {
 
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-[6px] border-white transform transition-transform duration-700 group-hover:scale-[1.02] group-hover:-rotate-1">
               <img
-                src="/images/Home-Slider4.webp"
+                src="./images/Home-Slider4.webp"
                 alt="Hindustan College of Arts & Science Campus"
                 className="w-full h-auto object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out"
               />

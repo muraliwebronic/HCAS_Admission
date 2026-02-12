@@ -24,7 +24,7 @@ const Footer = () => {
             <div className="flex items-center gap-4 mb-6">
               {/* --- LOGO REPLACEMENT --- */}
               <img
-                src="/hcas-images/HCAS.png"
+                src="./hcas-images/HCAS.png"
                 alt="HCAS Logo"
                 className="object-contain h-14 rounded-2xl"
               />

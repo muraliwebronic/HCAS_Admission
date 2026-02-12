@@ -9,11 +9,11 @@ import { CAPS, SectionData, getThemeStyles, programsData } from '@/data/academic
 
 const StaticPanel = ({ data }: { data: SectionData }) => {
   const Icon = data.icon || BookOpen;
-  
-  // 1. Clean, Professional Deep Gradients (No textures/images)
+
+  // 1. Clean, Professional Deep Gradients (No textures./images)
   const isRed = data.theme === 'red';
-  const bgGradient = isRed 
-    ? 'bg-gradient-to-br from-red-900 to-red-950' 
+  const bgGradient = isRed
+    ? 'bg-gradient-to-br from-red-900 to-red-950'
     : 'bg-gradient-to-br from-slate-900 to-blue-950';
 
   return (
@@ -31,7 +31,7 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
 
       {/* --- CONTENT CONTAINER --- */}
       <div className="relative z-10 flex flex-col h-full p-6 md:p-8">
-        
+
         {/* Header Section */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-3 text-white/60">
@@ -42,7 +42,7 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
               Quick Links
             </span>
           </div>
-          
+
           <h2 className="text-2xl lg:text-3xl font-bold text-white leading-tight">
             {data.title}
           </h2>
@@ -66,11 +66,11 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
                   <span className="text-sm font-medium text-white/80 group-hover:text-white transition-colors">
                     {program.label}
                   </span>
-                  
+
                   {/* Subtle Arrow that appears on hover */}
-                  <ArrowRight 
-                    size={16} 
-                    className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" 
+                  <ArrowRight
+                    size={16}
+                    className="text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                   />
                 </Link>
               </li>
@@ -80,9 +80,9 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
 
         {/* Optional Footer/CTA area if needed, otherwise clean padding at bottom */}
         <div className="mt-4 pt-4 border-t border-white/10">
-           <p className="text-[10px] text-white/40 uppercase tracking-widest">
-              Select a program to learn more
-           </p>
+          <p className="text-[10px] text-white/40 uppercase tracking-widest">
+            Select a program to learn more
+          </p>
         </div>
 
       </div>
@@ -100,7 +100,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
   const totalItems = data.sliderItems.length;
   // Logic: Only show navigation if we have more items than fits on one page
   const showNavigation = totalItems > itemsPerPage;
-  
+
   const totalSlides = Math.ceil(totalItems / itemsPerPage);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -117,7 +117,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
 
   return (
     <div className="w-full flex flex-col justify-center relative z-10 px-2 lg:px-4 h-full py-8">
-      
+
       {/* --- HEADER SECTION --- */}
       <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-10 gap-4">
         <div>
@@ -146,7 +146,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
       <div className="relative w-full">
         {/* Mobile: grid-cols-2 with tighter gap (gap-3) to fit 2 cards */}
         <div key={currentSlide} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 animate-fade-in-up">
-          
+
           {visibleItems.map((item, index) => (
             <Link key={index} href={item.link} className="block h-full">
               <div className={`
@@ -158,7 +158,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
                 transition-all duration-300 ease-out
                 overflow-hidden
               `}>
-                
+
                 {/* Decorative Background Blob (Subtle) */}
                 <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br ${gradientText}`} />
 
@@ -182,7 +182,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
                   <h3 className="text-xs md:text-sm lg:text-base font-bold text-gray-800 leading-snug group-hover:text-gray-900 mb-1 line-clamp-2">
                     {item.name}
                   </h3>
-                  
+
                 </div>
 
                 {/* Bottom Section: Action Link */}
@@ -191,7 +191,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
                     APPLY NOW
                   </span>
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gray-50 ${accentBg} group-hover:text-white transition-all`}>
-                     <ArrowRight size={12} className="opacity-50 group-hover:opacity-100 -ml-0.5" />
+                    <ArrowRight size={12} className="opacity-50 group-hover:opacity-100 -ml-0.5" />
                   </div>
                 </div>
 
@@ -214,11 +214,10 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
-                i === currentSlide 
-                  ? `w-8 ${data.theme === 'red' ? 'bg-red-600' : 'bg-blue-600'}` 
+              className={`h-1.5 rounded-full transition-all duration-500 ease-out ${i === currentSlide
+                  ? `w-8 ${data.theme === 'red' ? 'bg-red-600' : 'bg-blue-600'}`
                   : 'w-2 bg-gray-200 hover:bg-gray-400'
-              }`}
+                }`}
             />
           ))}
         </div>

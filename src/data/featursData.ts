@@ -23,37 +23,37 @@ export const LOGOS: LogoItem[] = [
   {
     name: "India Today Ranking",
     // Matches the file named 'download' which is the India Today logo
-    src: "/hcas-images/partners/download.jpeg",
+    src: "./hcas-images/partners/download.jpeg",
     alt: "India Today Ranking",
   },
   {
     name: "ISO Certified",
     // Matches the file named 'download-8' which is the ISO logo
-    src: "/hcas-images/partners/download-8.png",
+    src: "./hcas-images/partners/download-8.png",
     alt: "ISO 9001:2015 Certified",
   },
   {
     name: "NAAC",
     // Matches the file named 'images' which is the NAAC logo
-    src: "/hcas-images/partners/images.jpeg",
+    src: "./hcas-images/partners./images.jpeg",
     alt: "NAAC Accreditation",
   },
   {
     name: "ABET",
     // Matches the file named 'abet-1'
-    src: "/hcas-images/partners/abet-1.png",
+    src: "./hcas-images/partners/abet-1.png",
     alt: "ABET Computing Accreditation",
   },
   {
     name: "ICAR",
     // Matches the file named 'ICAR-accreditation'
-    src: "/hcas-images/partners/ICAR-accreditation.png",
+    src: "./hcas-images/partners/ICAR-accreditation.png",
     alt: "ICAR Accreditation",
   },
   {
     name: "Times Now",
     // Matches the file named 'Times_Now_2010'
-    src: "/hcas-images/partners/Times_Now_2010.png",
+    src: "./hcas-images/partners/Times_Now_2010.png",
     alt: "Times Now Recognition",
   },
 ];

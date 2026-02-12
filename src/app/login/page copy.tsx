@@ -24,7 +24,7 @@ export default function EnquiryPage() {
         <div
             className="relative min-h-screen w-full bg-gray-900 bg-cover bg-center font-sans flex flex-col lg:flex-row"
             style={{
-                backgroundImage: "url('/images/Home-Slider4.webp')"
+                backgroundImage: "url('./images/Home-Slider4.webp')"
             }}
         >
             {/* Dark Overlay - Fixed to cover scrolling area */}
@@ -111,7 +111,7 @@ export default function EnquiryPage() {
                                 {/* Logo */}
                                 <div className="h-17 lg:h-24 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg shadow-blue-900/20 overflow-hidden relative">
                                     <Image
-                                        src="/hcas-images/HCAS.png"
+                                        src="./hcas-images/HCAS.png"
                                         alt="HCAS Logo"
                                         fill
                                         className="object-cover p-1 rounded-xl"
