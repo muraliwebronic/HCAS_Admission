@@ -111,7 +111,7 @@ export default function EnquiryPage() {
                                 {/* Logo */}
                                 <div className="h-17 lg:h-24 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg shadow-blue-900/20 overflow-hidden relative">
                                     <Image
-                                        src="./hcas-images/HCAS.png"
+                                        src="/hcas-images/HCAS.png"
                                         alt="HCAS Logo"
                                         fill
                                         className="object-cover p-1 rounded-xl"

@@ -123,7 +123,7 @@ export const WhyHCASSection: React.FC = () => {
                   <div
                     className="absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     style={{
-                      backgroundImage: "url('./images/Home-Slider4.webp')",
+                      backgroundImage: "url('/images/Home-Slider4.webp')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",

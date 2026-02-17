@@ -111,7 +111,7 @@ export const WhyHCASSection: React.FC = () => {
                   <div
                     className="absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     style={{
-                      backgroundImage: "url('./images/Home-Slider4.webp')",
+                      backgroundImage: "url('/images/Home-Slider4.webp')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
@@ -148,7 +148,7 @@ export const WhyHCASSection: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-3xl font-black text-gray-900 leading-none tracking-tight">
-                      28+
+                      30+
                     </h4>
                     <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-1">
                       Years of Excellence
@@ -160,7 +160,7 @@ export const WhyHCASSection: React.FC = () => {
                 <div className="flex-1 flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors rounded-xl">
                   <div className="w-14 h-14 rounded-full bg-white border-2 border-orange-100 flex items-center justify-center shrink-0 shadow-sm p-2 overflow-hidden">
                     <img
-                      src="./images/naac.png"
+                      src="/images/naac.png"
                       alt="NAAC A Grade"
                       className="w-full h-full object-contain"
                     />
@@ -199,8 +199,11 @@ export const WhyHCASSection: React.FC = () => {
             {/* ... Features List ... */}
             <div className="flex flex-col gap-5">
               {FEATURES.map((feature, index) => (
-                <div
+                <a
                   key={index}
+                  href={feature.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-start gap-5 p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-blue-100 transition-all duration-300"
                 >
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -220,7 +223,7 @@ export const WhyHCASSection: React.FC = () => {
                       {feature.description}
                     </p>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

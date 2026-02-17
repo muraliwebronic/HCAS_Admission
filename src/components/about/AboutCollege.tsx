@@ -34,7 +34,7 @@ const AboutCollege = () => {
 
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-[6px] border-white transform transition-transform duration-700 group-hover:scale-[1.02] group-hover:-rotate-1">
               <img
-                src="./images/Home-Slider4.webp"
+                src="/images/Home-Slider4.webp"
                 alt="Hindustan College of Arts & Science Campus"
                 className="w-full h-auto object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out"
               />
@@ -113,13 +113,13 @@ const AboutCollege = () => {
 
             {/* CTA Button */}
             <div className="pt-8">
-              <button className="relative overflow-hidden group bg-blue-950 text-white font-bold py-4 px-10 rounded-full transition-all hover:shadow-[0_20px_40px_-15px_rgba(30,58,138,0.5)] active:scale-95">
+              <a href='https://hcaschennai.edu.in/home/about-hcas/' target='_blank' className="relative inline-block overflow-hidden group bg-blue-950 text-white font-bold py-4 px-10 rounded-full transition-all hover:shadow-[0_20px_40px_-15px_rgba(30,58,138,0.5)] active:scale-95">
                 <span className="relative z-10 flex items-center gap-2">
                   Explore More
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
-              </button>
+              </a>
             </div>
 
           </div>

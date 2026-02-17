@@ -10,6 +10,158 @@ export default function EnquiryPage() {
     const [activeStep, setActiveStep] = useState(0);
     const [isNotesOpen, setIsNotesOpen] = useState(false);
 
+    // Form States
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        mobile: '',
+        city: '',
+        course: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    // Validation Functions
+    const validateName = (name: string): string => {
+        if (!name.trim()) return 'Name is required';
+        if (!/^[a-zA-Z\s]+$/.test(name)) return 'Name should contain only letters';
+        if (name.trim().length < 3) return 'Name must be at least 3 characters';
+        return '';
+    };
+
+    const validateEmail = (email: string): string => {
+        if (!email.trim()) return 'Email is required';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) return 'Please enter a valid email address';
+        return '';
+    };
+
+    const validateMobile = (mobile: string): string => {
+        if (!mobile.trim()) return 'Mobile number is required';
+        // Indian phone number: 10 digits, starting with 6-9
+        const mobileRegex = /^[6-9]\d{9}$/;
+        if (!mobileRegex.test(mobile)) return 'Please enter a valid 10-digit Indian mobile number (starting with 6-9)';
+        return '';
+    };
+
+    const validateCity = (city: string): string => {
+        if (!city.trim()) return 'City is required';
+        if (city.trim().length < 2) return 'City must be at least 2 characters';
+        return '';
+    };
+
+    const validateCourse = (course: string): string => {
+        if (!course) return 'Please select a course';
+        return '';
+    };
+
+    // Handle Input Change with validation
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Clear error for this field when user starts typing
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: '' });
+        }
+    };
+
+    // Handle Input Blur - validate on blur
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        let error = '';
+
+        switch (name) {
+            case 'name':
+                error = validateName(value);
+                break;
+            case 'email':
+                error = validateEmail(value);
+                break;
+            case 'mobile':
+                error = validateMobile(value);
+                break;
+            case 'city':
+                error = validateCity(value);
+                break;
+            case 'course':
+                error = validateCourse(value);
+                break;
+        }
+
+        if (error) {
+            setErrors({ ...errors, [name]: error });
+        }
+    };
+
+    // Submit Handler
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus({ type: null, message: '' });
+
+        // Comprehensive Validation
+        const newErrors: { [key: string]: string } = {
+            name: validateName(formData.name),
+            email: validateEmail(formData.email),
+            mobile: validateMobile(formData.mobile),
+            city: validateCity(formData.city),
+            course: validateCourse(formData.course)
+        };
+
+        // Filter out empty errors
+        const hasErrors = Object.values(newErrors).some(error => error !== '');
+
+        if (hasErrors) {
+            setErrors(newErrors);
+            setSubmitStatus({ type: 'error', message: 'Please fix the errors in the form.' });
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            const payload = {
+                lead_type: "CSL",
+                name: formData.name,
+                email: formData.email,
+                phone: formData.mobile,
+                clg_id: Number(process.env.NEXT_PUBLIC_GATI_COLLEGE_ID) || 0, // Default to 0 if not set
+                city: formData.city,
+                course: formData.course,
+                // Static / Default Values
+                source: "Web_API",
+                utm_source: "HCAS_Website",
+                utm_medium: "Web_Form",
+                utm_campaign: "Admissions_2025"
+            };
+
+            const response = await fetch('https://hcaschennai.gaticrm.com/api/v1/lead/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'secret-key': process.env.NEXT_PUBLIC_GATI_SECRET_KEY || ''
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setSubmitStatus({ type: 'success', message: 'Enquiry submitted successfully! We will contact you soon.' });
+                setFormData({ name: '', email: '', mobile: '', city: '', course: '' }); // Reset form
+                setErrors({}); // Clear errors
+            } else {
+                setSubmitStatus({ type: 'error', message: data.message || 'Submission failed. Please try again.' });
+            }
+        } catch (error) {
+            console.error('API Error:', error);
+            setSubmitStatus({ type: 'error', message: 'Network error. Please try again later.' });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     // The content you requested to show
     const infoContent = {
         description: "Prospective students are requested to fill out the enquiry form with accurate details. Our admission team will review the information and contact you with further guidance regarding the admission process.",
@@ -35,7 +187,7 @@ export default function EnquiryPage() {
             {/* Background Image (Fixed) */}
             <div
                 className="absolute hidden md:block  inset-0 z-0 bg-cover bg-center  "
-                style={{ backgroundImage: "url('./images/Home-Slider4.webp')" }}
+                style={{ backgroundImage: "url('/images/Home-Slider4.webp')" }}
             />
 
             {/* Dark Overlay for better contrast */}
@@ -89,9 +241,9 @@ export default function EnquiryPage() {
                         {/* Logo Area */}
                         <div className="flex justify-between items-start">
                             <div className="flex items-center gap-4">
-                                <div className=" h-14  bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
+                                <div className=" h-20  bg-white backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
                                     <img
-                                        src="./hcas-images/HCAS.png"
+                                        src="/hcas-images/Hcas transparent.png"
                                         alt="HCAS Logo"
                                         className="object-contain h-14 rounded-2xl"
                                     />
@@ -186,60 +338,129 @@ export default function EnquiryPage() {
                             <p className="text-sm text-gray-500 mt-1">Fill in the details below to get started.</p>
                         </div>
 
-                        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                        {submitStatus.type && (
+                            <div className={`mb-6 p-4 rounded-xl text-sm font-medium ${submitStatus.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                                {submitStatus.message}
+                            </div>
+                        )}
+
+                        <form className="space-y-4" onSubmit={handleSubmit}>
 
                             {/* Inputs */}
-                            <div className="group relative">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
-                                    <User size={18} />
+                            <div className="space-y-1">
+                                <div className="group relative">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                                        <User size={18} />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder="Full Name"
+                                        className={`w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 ${errors.name ? 'border-red-300 focus:border-red-400' : 'border-transparent focus:border-blue-100'} rounded-xl outline-none focus:bg-white focus:ring-4 ${errors.name ? 'focus:ring-red-50/50' : 'focus:ring-blue-50/50'} transition-all font-medium text-gray-800`}
+                                        required
+                                    />
                                 </div>
-                                <input type="text" placeholder="Full Name" className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 border-transparent focus:border-blue-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-50/50 transition-all font-medium text-gray-800" />
+                                {errors.name && <p className="text-xs text-red-600 ml-1">{errors.name}</p>}
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="group relative">
-                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
-                                        <Mail size={18} />
+                                <div className="space-y-1">
+                                    <div className="group relative">
+                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                                            <Mail size={18} />
+                                        </div>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Email"
+                                            className={`w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 ${errors.email ? 'border-red-300 focus:border-red-400' : 'border-transparent focus:border-blue-100'} rounded-xl outline-none focus:bg-white focus:ring-4 ${errors.email ? 'focus:ring-red-50/50' : 'focus:ring-blue-50/50'} transition-all font-medium text-gray-800`}
+                                            required
+                                        />
                                     </div>
-                                    <input type="email" placeholder="Email" className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 border-transparent focus:border-blue-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-50/50 transition-all font-medium text-gray-800" />
+                                    {errors.email && <p className="text-xs text-red-600 ml-1">{errors.email}</p>}
                                 </div>
-                                <div className="group relative">
-                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
-                                        <Phone size={18} />
+                                <div className="space-y-1">
+                                    <div className="group relative">
+                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                                            <Phone size={18} />
+                                        </div>
+                                        <input
+                                            type="tel"
+                                            name="mobile"
+                                            value={formData.mobile}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Mobile (10 digits)"
+                                            maxLength={10}
+                                            className={`w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 ${errors.mobile ? 'border-red-300 focus:border-red-400' : 'border-transparent focus:border-blue-100'} rounded-xl outline-none focus:bg-white focus:ring-4 ${errors.mobile ? 'focus:ring-red-50/50' : 'focus:ring-blue-50/50'} transition-all font-medium text-gray-800`}
+                                            required
+                                        />
                                     </div>
-                                    <input type="tel" placeholder="Mobile" className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 border-transparent focus:border-blue-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-50/50 transition-all font-medium text-gray-800" />
+                                    {errors.mobile && <p className="text-xs text-red-600 ml-1">{errors.mobile}</p>}
                                 </div>
                             </div>
 
-                            <div className="group relative">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
-                                    <MapPin size={18} />
+                            <div className="space-y-1">
+                                <div className="group relative">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                                        <MapPin size={18} />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={formData.city}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder="City / District"
+                                        className={`w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 ${errors.city ? 'border-red-300 focus:border-red-400' : 'border-transparent focus:border-blue-100'} rounded-xl outline-none focus:bg-white focus:ring-4 ${errors.city ? 'focus:ring-red-50/50' : 'focus:ring-blue-50/50'} transition-all font-medium text-gray-800`}
+                                        required
+                                    />
                                 </div>
-                                <input type="text" placeholder="City / District" className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 border-transparent focus:border-blue-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-50/50 transition-all font-medium text-gray-800" />
+                                {errors.city && <p className="text-xs text-red-600 ml-1">{errors.city}</p>}
                             </div>
 
-                            <div className="group relative">
-                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
-                                    <BookOpen size={18} />
+                            <div className="space-y-1">
+                                <div className="group relative">
+                                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                                        <BookOpen size={18} />
+                                    </div>
+                                    <select
+                                        name="course"
+                                        value={formData.course}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={`w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 ${errors.course ? 'border-red-300 focus:border-red-400' : 'border-transparent focus:border-blue-100'} rounded-xl outline-none focus:bg-white focus:ring-4 ${errors.course ? 'focus:ring-red-50/50' : 'focus:ring-blue-50/50'} transition-all font-medium text-gray-800 appearance-none cursor-pointer`}
+                                        required
+                                    >
+                                        <option value="" disabled>Select Course</option>
+                                        {courseList.map((course, idx) => (
+                                            <option key={idx} value={course}>{course}</option>
+                                        ))}
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                                    </div>
                                 </div>
-                                <select className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-2 border-transparent focus:border-blue-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-blue-50/50 transition-all font-medium text-gray-800 appearance-none cursor-pointer">
-                                    <option value="" disabled selected>Select Course</option>
-                                    {courseList.map((course, idx) => (
-                                        <option key={idx} value={course}>{course}</option>
-                                    ))}
-                                </select>
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
-                                </div>
+                                {errors.course && <p className="text-xs text-red-600 ml-1">{errors.course}</p>}
                             </div>
 
                             {/* --- BUTTON SECTION FROM IMAGE --- */}
                             <div className="mt-8 space-y-5">
 
                                 {/* 1. Submit Enquiry (Blue Button) */}
-                                <button className="w-full bg-[#1a3696] hover:bg-blue-900 text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(26,54,150,0.39)] active:scale-[0.98] flex items-center justify-center gap-2 text-base transition-all duration-200">
-                                    Submit Enquiry
-                                    <Send size={18} className="ml-1" />
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className={`w-full bg-[#1a3696] hover:bg-blue-900 text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgba(26,54,150,0.39)] active:scale-[0.98] flex items-center justify-center gap-2 text-base transition-all duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit Enquiry'}
+                                    {!isSubmitting && <Send size={18} className="ml-1" />}
                                 </button>
 
                                 {/* Divider */}
@@ -252,10 +473,15 @@ export default function EnquiryPage() {
                                 </div>
 
                                 {/* 2. Apply Now (White Button with Red Accent) */}
-                                <button className="w-full  text-[#e60000] font-bold py-4 rounded-2xl flex items-center justify-center gap-2 text-lg transition-all duration-200 group">
+                                <a
+                                    href="https://pay.hcaschennai.edu.in:5002/onlineregistration/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full text-[#e60000] font-bold py-4 rounded-2xl flex items-center justify-center gap-2 text-lg transition-all duration-200 group hover:bg-red-50 cursor-pointer"
+                                >
                                     <ArrowRightCircle size={22} className="text-[#e60000] group-hover:translate-x-0.5 transition-transform" />
                                     Apply Now
-                                </button>
+                                </a>
 
                             </div>
 

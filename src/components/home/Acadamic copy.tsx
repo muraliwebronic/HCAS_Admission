@@ -6,198 +6,205 @@ import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, Scroll, BookOpen, A
 import { CAPS, SectionData, getThemeStyles, programsData } from '@/data/academicData';
 
 
-// --- STATIC PANEL (Fixed Width Logic Removed) ---
 const StaticPanel = ({ data }: { data: SectionData }) => {
-  const styles = getThemeStyles(data.theme);
-  const Icon = data.icon;
+  const Icon = data.icon || BookOpen;
+  const isRed = data.theme === 'red';
+
+  // Base background and shadow classes matching the old HTML
+  const containerClasses = isRed
+    ? 'bg-red-950 shadow-[0_20px_50px_-12px_rgba(185,28,28,0.5)]'
+    : 'bg-blue-950 shadow-[0_20px_50px_-12px_rgba(30,58,138,0.5)]';
+
+  // Accent Colors for list items (Applied only on Desktop Hover)
+  const accentBorder = isRed ? 'lg:group-hover:border-red-500/30' : 'lg:group-hover:border-blue-500/30';
+  const accentGlow = isRed ? 'lg:group-hover:from-red-900/20' : 'lg:group-hover:from-blue-900/20';
 
   return (
-    // Note: I removed xl:w-[35%] from here. It is now handled by the parent wrapper.
-    <div className={`w-full min-h-[500px] h-full relative z-20 flex flex-col p-8 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl group ${styles.solid} ${styles.shadow}`}>
+    <div className={`
+      w-full relative z-20 
+      rounded-3xl overflow-hidden 
+      flex flex-col 
+      transition-all duration-300 hover:shadow-2xl group
+      ${containerClasses}
+      h-auto
+      lg:h-full lg:min-h-[500px] lg:max-h-[600px]
+    `}>
 
-      {/* Optional Bg Image */}
-      {data.bgImage && (
+      {/* --- BACKGROUND LAYER (Matches Old HTML) --- */}
+      {isRed ? (
+        // Red Theme: Gradient Background
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-700 via-red-600 to-red-800" />
+      ) : (
+        // Blue Theme: Image + Overlay
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
-            src={data.bgImage}
+            src="/images/pg-text.png"
             alt="Texture"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-50 mix-blend-overlay"
           />
-          <div className={`absolute inset-0 z-10 ${styles.gradient} opacity-90 mix-blend-multiply`}></div>
+          <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-900 via-indigo-800 to-blue-950 opacity-90 mix-blend-multiply" />
         </div>
       )}
 
-      {/* Default Gradient */}
-      {!data.bgImage && (
-        <div className={`absolute inset-0 z-0 ${styles.gradient}`}></div>
-      )}
+      {/* Common Overlay (from Old HTML: bg-white/5 pointer-events-none z-10) */}
+      <div className="absolute inset-0 bg-white/5 pointer-events-none z-10" />
 
-      {/* Glass Texture */}
-      <div className="absolute inset-0 bg-white/5 pointer-events-none z-10"></div>
-
-      {/* Content */}
+      {/* --- CONTENT (z-20) --- */}
       <div className="relative z-20 flex flex-col h-full">
-        <div className="mb-6 pb-4 border-b border-white/20">
+
+        {/* HEADER */}
+        <div className="p-6 md:p-8 border-b border-white/20"> {/* Changed border-white/5 to border-white/20 to match old HTML */}
           <div className="flex items-center gap-2 text-white/80 mb-1">
-            <Icon size={14} />
+            <Sparkles className="w-3.5 h-3.5" />
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Academics</span>
           </div>
-          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white">{data.title}</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white">
+            {data.title}
+          </h2>
         </div>
 
-        <div className={`grid ${data.staticList.length > 8 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'} gap-x-6 gap-y-3 content-start overflow-y-auto custom-scrollbar pr-2`}>
-          {data.staticList.map((program, index) => (
-            <Link
-              key={index}
-              href={program.link}
-              className="flex items-start gap-2 group/item cursor-pointer hover:bg-white/10 p-1.5 rounded-lg transition-colors"
-            >
-              <div className={`mt-1.5 w-1.5 h-1.5 rounded-full ${styles.subtle} group-hover/item:bg-white flex-shrink-0 shadow-[0_0_5px_rgba(255,255,255,0.8)]`} />
-              <span className="text-[10px] lg:text-[11px] font-medium leading-tight text-white/80 group-hover/item:text-white transition-colors">
-                {program.label}
-              </span>
-            </Link>
-          ))}
+        {/* LIST SECTION */}
+        {/* Mobile: No overflow-y-auto (lets page scroll). Desktop: overflow-y-auto (internal scroll) */}
+        <div className="flex-1 p-6 lg:overflow-y-auto custom-scrollbar pr-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 content-start"> {/* Changed from flex-col to grid to match old HTML layout */}
+            {data.staticList.map((program, index) => (
+              <li key={index}>
+                <Link
+                  href={program.link}
+                  className={`
+                    flex items-start gap-2 group/item cursor-pointer hover:bg-white/10 p-1.5 rounded-lg transition-colors
+                  `}
+                >
+                  {/* Dot Indicator */}
+                  <div className={`mt-1.5 w-1.5 h-1.5 rounded-full ${isRed ? 'bg-red-300' : 'bg-blue-300'} group-hover/item:bg-white flex-shrink-0 shadow-[0_0_5px_rgba(255,255,255,0.8)]`} />
+
+                  {/* Text */}
+                  <span className="text-[10px] lg:text-[11px] font-medium leading-tight text-white/80 group-hover/item:text-white transition-colors uppercase">
+                    {program.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <GraduationCap className="absolute -bottom-10 -right-6 w-64 h-64 text-black opacity-[0.1] rotate-[-20deg] pointer-events-none" />
+        {/* Old HTML Bottom Icon Decoration */}
+        <GraduationCap
+          className="absolute -bottom-10 -right-6 w-64 h-64 text-black opacity-[0.1] rotate-[-20deg] pointer-events-none"
+        />
+
       </div>
+
+      <style jsx>{`
+        @media (min-width: 1024px) {
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-// --- SLIDER PANEL (Fixed Width Logic Removed) ---
+// --- SLIDER PANEL (Unchanged from your preferred version) ---
+
 const SliderPanel = ({ data }: { data: SectionData }) => {
   const styles = getThemeStyles(data.theme);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const itemsPerPage = 6;
-  const totalSlides = Math.ceil(data.sliderItems.length / itemsPerPage);
+  const totalItems = data.sliderItems.length;
+  const showNavigation = totalItems > itemsPerPage;
+  const totalSlides = Math.ceil(totalItems / itemsPerPage);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
 
   const visibleItems = data.sliderItems.slice(currentSlide * itemsPerPage, (currentSlide + 1) * itemsPerPage);
 
+  const isRed = data.theme === 'red';
+  const gradientText = isRed ? 'from-red-600 to-orange-600' : 'from-blue-600 to-indigo-600';
+  const accentBg = isRed ? 'group-hover:bg-red-600' : 'group-hover:bg-blue-600';
+  const accentText = isRed ? 'group-hover:text-red-600' : 'group-hover:text-blue-600';
+  const borderHighlight = isRed ? 'hover:border-red-200' : 'hover:border-blue-200';
+  const bgSoft = isRed ? 'bg-red-50' : 'bg-blue-50';
+
   return (
-    // Note: I removed xl:w-[65%] from here.
-    <div className="w-full flex flex-col justify-center relative z-10 px-2 lg:px-4 h-full">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+    <div className="w-full flex flex-col justify-center relative z-10 px-2 lg:px-4 h-full py-8">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-10 gap-4 px-1">
         <div>
           <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 leading-tight">
-            Featured <span className={`text-transparent bg-clip-text bg-gradient-to-r ${data.theme === 'red' ? 'from-red-600 to-orange-600' : 'from-blue-600 to-indigo-600'}`}>{data.title}</span>
+            Featured <span className={`text-transparent bg-clip-text bg-gradient-to-r ${gradientText}`}>{data.title}</span>
           </h2>
-          <p className={`${data.theme === 'red' ? 'text-red-900/60' : 'text-blue-900/60'} font-bold tracking-widest uppercase text-xs mt-2`}>
+          <p className={`${isRed ? 'text-red-900/60' : 'text-blue-900/60'} font-bold tracking-widest uppercase text-xs mt-2`}>
             {data.subtitle}
           </p>
         </div>
-
-        <div className="flex gap-3">
-          <button onClick={prevSlide} className={`group p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg text-gray-400 hover:${styles.textHighlight} hover:scale-110 active:scale-95 transition-all duration-300 border border-white`}>
-            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-          </button>
-          <button onClick={nextSlide} className={`group p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg text-gray-400 hover:${styles.textHighlight} hover:scale-110 active:scale-95 transition-all duration-300 border border-white`}>
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
-          </button>
-        </div>
+        {showNavigation && (
+          <div className="flex gap-3">
+            <button onClick={prevSlide} className={`group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300`}>
+              <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+            </button>
+            <button onClick={nextSlide} className={`group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300`}>
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="relative w-full pb-12">
-        <div key={currentSlide} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 animate-fade-in-up">
+      <div className="relative w-full">
+        <div key={currentSlide} className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 animate-fade-in-up">
           {visibleItems.map((item, index) => (
-            <div key={index} className="group relative flex flex-col justify-end h-full pt-14 md:pt-16 font-sans">
-
-              {/* 1. FLOATING ICON BOX (The "Head") */}
-              <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pointer-events-none">
-                <div className="
-            relative w-24 h-24 md:w-28 md:h-28 
-            rounded-3xl flex items-center justify-center 
-            transition-transform duration-500
-            group-hover:-translate-y-4 group-hover:scale-105 group-hover:rotate-3
-          ">
-                  <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b ${item.color === 'green' ? 'from-green-100/50' : 'from-blue-100/50'} to-transparent`} />
-
-                  <img
-                    src={item.color === 'green' ? CAPS.green : CAPS.blue}
-                    alt="Cap"
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-md relative z-10"
-                  />
-                </div>
-              </div>
-
-              {/* 2. PEDESTAL BASE (The "Body") */}
-              <div className="
-          relative h-full w-full 
-          rounded-[2.5rem] 
-         
-          p-5 pt-16 md:p-6 md:pt-20 
-          flex flex-col items-center 
-          shadow-lg transition-all duration-500 
-         
-        ">
-
-                {/* Fake Floor Shadow (Depth under the floating icon) */}
-                <div className="absolute top-16 md:top-20 left-1/2 -translate-x-1/2 w-16 h-4 bg-black/10 blur-xl rounded-full transition-all duration-500 group-hover:w-12 group-hover:bg-blue-900/20 group-hover:blur-2xl" />
-
-                {/* Glossy Overlay */}
-                <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
-
-                {/* Content Section */}
-                <div className="relative z-10 text-center flex-1 flex flex-col w-full items-center justify-center mt-2">
-
-                  {/* Tag/Label */}
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-900/40 mb-2">
-                    Course
-                  </p>
-
-                  {/* Title */}
-                  <h3 className="text-xs md:text-sm font-extrabold text-slate-800 line-clamp-2 leading-tight px-1">
+            <a key={index} target='_blanck' href="https://pay.hcaschennai.edu.in:5002/onlineregistration/" className="block h-full">
+              <div className={`
+                group relative h-full flex flex-col justify-between
+                bg-white rounded-2xl 
+                border border-gray-100 ${borderHighlight}
+                p-4 md:p-5
+                shadow-sm hover:shadow-xl hover:-translate-y-1
+                transition-all duration-300 ease-out
+                overflow-hidden
+              `}>
+                <div>
+                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl mb-3 flex items-center justify-center ${bgSoft} ${accentBg} transition-colors duration-300`}>
+                    <img src={item.color === 'green' ? CAPS.green : CAPS.blue} alt="" className="w-8 h-8 md:w-9 md:h-9 object-contain group-hover:brightness-0 group-hover:invert transition-all" />
+                  </div>
+                  <h3 className="text-sm md:text-base font-bold text-gray-800 leading-snug group-hover:text-gray-900 line-clamp-2">
                     {item.name}
                   </h3>
                 </div>
-
-                {/* Bottom Action Bar (Separator + Button) */}
-                <div className="mt-6 w-full pt-5 border-t border-white/20 group-hover:border-white/40 transition-colors flex items-center justify-center relative z-20">
-                  <span
-                    className={`
-                w-full flex items-center justify-center gap-2 py-2.5 rounded-xl 
-                text-[10px] md:text-xs font-black uppercase tracking-wider text-white 
-                transition-all duration-200 
-                active:shadow-none active:translate-y-[4px]
-                ${data.theme === 'red'
-                        ? 'bg-gradient-to-r from-red-600 to-red-500 '
-                        : 'bg-gradient-to-r from-blue-600 to-blue-500 '
-                      }
-              `}
-                  >
-                    Apply Now
-                    <ArrowRight size={12} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
-                  </span>
+                <div className="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between">
+                  <span className={`text-[10px] md:text-xs font-bold text-gray-400 ${accentText} transition-colors uppercase tracking-wide`}>Apply Now</span>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gray-50 ${accentBg} group-hover:text-white transition-all`}>
+                    <ArrowRight size={12} className="opacity-50 group-hover:opacity-100 -ml-0.5" />
+                  </div>
                 </div>
-
               </div>
-
-              {/* Full Card Click Area */}
-              <Link href={item.link} className="absolute inset-0 z-30" aria-label={`View ${item.name}`} />
-            </div>
+            </a>
           ))}
-
-          {/* Empty slots filler for desktop */}
-          {Array.from({ length: itemsPerPage - visibleItems.length }).map((_, i) => (
+          {Array.from({ length: Math.max(0, itemsPerPage - visibleItems.length) }).map((_, i) => (
             <div key={`empty-${i}`} className="hidden lg:block h-full" />
           ))}
         </div>
       </div>
 
-      <div className="flex justify-center mt-8 gap-2">
-        {Array.from({ length: totalSlides }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentSlide(i)}
-            className={`h-1 rounded-full transition-all duration-500 ease-out ${i === currentSlide ? `w-8 ${styles.pagination}` : `w-2 ${styles.paginationInactive} hover:bg-gray-400`}`}
-          />
-        ))}
-      </div>
+      {showNavigation && (
+        <div className="flex justify-center mt-8 gap-2">
+          {Array.from({ length: totalSlides }).map((_, i) => (
+            <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1.5 rounded-full transition-all duration-500 ease-out ${i === currentSlide ? `w-8 ${isRed ? 'bg-red-600' : 'bg-blue-600'}` : 'w-2 bg-gray-200 hover:bg-gray-400'}`} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -206,9 +213,8 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
 export default function AcademicsPage() {
   return (
     <main className="w-full bg-white overflow-hidden">
-
       {programsData.map((section) => (
-        <section key={section.id} className="relative  bg-white flex items-center justify-center p-4 lg:p-10 lg:pt-32 border-b border-gray-100 last:border-0">
+        <section key={section.id} className="relative bg-white flex items-center justify-center p-4 lg:p-10 lg:pt-32 border-b border-gray-100 last:border-0">
 
           {/* Ambient Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -225,10 +231,12 @@ export default function AcademicsPage() {
               </>
             )}
           </div>
+
+          {/* Main Container - items-stretch forces equal height */}
           <div className="w-full max-w-[1600px] flex flex-col xl:flex-row gap-8 items-stretch relative z-10">
 
             {/* STATIC PANEL WRAPPER */}
-            <div className={`w-full xl:w-[35%] ${section.layout === 'static-right' ? 'xl:order-2' : 'xl:order-1'}`}>
+            <div className={`w-full xl:w-[35%] h-auto ${section.layout === 'static-right' ? 'xl:order-2' : 'xl:order-1'}`}>
               <StaticPanel data={section} />
             </div>
 
@@ -240,9 +248,6 @@ export default function AcademicsPage() {
           </div>
         </section>
       ))}
-
-
-
     </main>
   );
 }

@@ -3,9 +3,9 @@ import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, Scroll, BookOpen } 
 
 // --- ASSETS & CONFIG ---
 export const CAPS = {
-  green: "./images/greencap.png",
-  blue: "./images/bluecap.png",
-  red: "./images/redcap.png", // Added just in case, though not used in original
+  green: "/images/greencap.png",
+  blue: "/images/bluecap.png",
+  red: "/images/redcap.png", // Added just in case, though not used in original
 };
 
 // --- TYPES ---
@@ -66,12 +66,17 @@ export const programsData: SectionData[] = [
     sliderItems: [
       { name: 'B.B.A. Business Administration', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-b-a/' },
       { name: 'B.C.A. Computer Applications', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-c-a-computer-applications/' },
-
-      { name: 'B.Sc Artificial Intelligence', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-computer-science-with-artificial-intelligence/' },
-      { name: 'B.Sc Biotechnology', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-biotechnology/' },
+      { name: 'B.Com Accounting & Finance', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-com-accounting-finance/' },
+      { name: 'B.Com Bank Management', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-com-bank-management/' },
+      { name: 'B.Com Computer Application', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-com-computer-application/' },
+      { name: 'B.Com Corporate Secretaryship', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-com-corporate-secretaryship' },
+      { name: 'B.Com General', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-com-general/' },
+      { name: 'B.S.W Social Work', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/bsw-social-work' },
+      { name: 'B.Sc Artificial Intelligence', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-computer-science-with-artificial-intelligence/' },
+      { name: 'B.Sc Biotechnology', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-biotechnology/' },
       { name: 'B.Sc Computer Science', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-computer-science/' },
       { name: 'B.Sc Data Science', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-computer-science-with-data-science/' },
-      { name: 'B.Sc Microbiology', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-microbiology/' },
+      { name: 'B.Sc Microbiology', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-microbiology/' },
       { name: 'B.Sc Psychology', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-psychology/' },
       { name: 'B.Sc Visual Communication', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/undergraduate-courses/b-sc-visual-communication/' },
     ]
@@ -101,12 +106,13 @@ export const programsData: SectionData[] = [
     sliderItems: [
       { name: 'MBA', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/mba/' },
       { name: 'MCA', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/mca/' },
-      { name: 'M.Com General', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-com/' },
-      { name: 'M.S.W Social Work', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/msw/msw-social-work' },
-      { name: 'M.Sc Biotechnology', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-biotechnology/' },
-      { name: 'M.Sc Computer Science', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-computer-science/' },
+      { name: 'M.Com General', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-com/' },
+      { name: 'M.S.W Social Work', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/msw/msw-social-work' },
+      { name: 'M.Sc Applied Microbiology', color: 'green', link: '#' },
+      { name: 'M.Sc Biotechnology', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-biotechnology/' },
+      { name: 'M.Sc Computer Science', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-computer-science/' },
       { name: 'M.Sc Information Technology', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-information-technology/' },
-      { name: 'M.Sc Visual Communication', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-visual-communication/' },
+      { name: 'M.Sc Visual Communication', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/postgraduate-courses/m-sc-visual-communication/' },
     ]
   },
 
@@ -117,16 +123,16 @@ export const programsData: SectionData[] = [
     theme: 'blue',
     layout: 'static-left',
     icon: Scroll,
-    bgImage: './images/sclor.jpg',
+    bgImage: '/images/sclor.jpg',
     staticList: [
-      { label: 'PH.D BIOTECHNOLOGY', link: '#' },
-      { label: 'PH.D COMMERCE', link: '#' },
-      { label: 'PH.D MICROBIOLOGY', link: '#' },
+      { label: 'PH.D BIOTECHNOLOGY', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
+      { label: 'PH.D COMMERCE', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
+      { label: 'PH.D MICROBIOLOGY', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
     ],
     sliderItems: [
-      { name: 'Ph.D Biotechnology', color: 'blue', link: '#' },
-      { name: 'Ph.D Commerce', color: 'blue', link: '#' },
-      { name: 'Ph.D Microbiology', color: 'green', link: '#' },
+      { name: 'Ph.D Biotechnology', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
+      { name: 'Ph.D Commerce', color: 'blue', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
+      { name: 'Ph.D Microbiology', color: 'green', link: 'https://hcaschennai.edu.in/academics/programmes/research/' },
     ]
   },
 
@@ -139,13 +145,13 @@ export const programsData: SectionData[] = [
     icon: BookOpen,
     bgImage: 'images/pg-text.png',
     staticList: [
-      { label: 'VOCATIONAL DIPLOMA IN COMPUTER HARDWARE SERVICING (VDHS)', link: '#' },
-      { label: 'VOCATIONAL DIPLOMA IN COMPUTER APPLICATIONS (VDCA)', link: '#' },
-      { label: 'VOCATIONAL DIPLOMA IN BEAUTICIAN (VDIB)', link: '#' },
-      { label: 'VOCATIONAL DIPLOMA IN DESKTOP PUBLISHING (VDTP)', link: '#' },
-      { label: 'VOCATIONAL DIPLOMA IN GENERAL DUTY ASSISTANT (VDGA)', link: '#' },
-      { label: 'DIPLOMA IN OPTOMETRY', link: '#' },
-      { label: 'DIPLOMA IN MEDICAL LABORATORY TECHNOLOGY', link: '#' },
+      { label: 'VOCATIONAL DIPLOMA IN COMPUTER HARDWARE SERVICING (VDHS)', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'VOCATIONAL DIPLOMA IN COMPUTER APPLICATIONS (VDCA)', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'VOCATIONAL DIPLOMA IN BEAUTICIAN (VDIB)', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'VOCATIONAL DIPLOMA IN DESKTOP PUBLISHING (VDTP)', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'VOCATIONAL DIPLOMA IN GENERAL DUTY ASSISTANT (VDGA)', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'DIPLOMA IN OPTOMETRY', link: 'https://hcaschennai.edu.in/hcc/' },
+      { label: 'DIPLOMA IN MEDICAL LABORATORY TECHNOLOGY', link: 'https://hcaschennai.edu.in/hcc/' },
     ],
     sliderItems: [
       { name: 'Hardware Servicing (VDHS)', color: 'blue', link: '#' },

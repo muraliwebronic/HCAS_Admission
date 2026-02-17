@@ -1,23 +1,38 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, Scroll, BookOpen, ArrowRight } from 'lucide-react';
+import { GraduationCap, ChevronLeft, ChevronRight, Sparkles, BookOpen, ArrowRight, ChevronDown } from 'lucide-react';
 import { CAPS, SectionData, getThemeStyles, programsData } from '@/data/academicData';
 
-
+// --- STATIC PANEL (Sidebar with Scroll Arrow) ---
 const StaticPanel = ({ data }: { data: SectionData }) => {
   const Icon = data.icon || BookOpen;
   const isRed = data.theme === 'red';
 
-  // Base background and shadow classes matching the old HTML
+  // State and Ref for Scroll Indicator
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+
+  // Check if the container has scrollable content and isn't at the bottom
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+      setCanScroll(scrollHeight > clientHeight && Math.ceil(scrollTop + clientHeight) < scrollHeight - 2);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, [data]);
+
   const containerClasses = isRed
     ? 'bg-red-950 shadow-[0_20px_50px_-12px_rgba(185,28,28,0.5)]'
     : 'bg-blue-950 shadow-[0_20px_50px_-12px_rgba(30,58,138,0.5)]';
 
-  // Accent Colors for list items (Applied only on Desktop Hover)
-  const accentBorder = isRed ? 'lg:group-hover:border-red-500/30' : 'lg:group-hover:border-blue-500/30';
-  const accentGlow = isRed ? 'lg:group-hover:from-red-900/20' : 'lg:group-hover:from-blue-900/20';
+  const dotColor = isRed ? 'bg-red-400' : 'bg-blue-400';
 
   return (
     <div className={`
@@ -26,23 +41,17 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
       flex flex-col 
       transition-all duration-300 hover:shadow-2xl group
       ${containerClasses}
-      
-      /* MOBILE FIX: Auto height allows natural page scrolling */
       h-auto
-      
-      /* DESKTOP (PC): Keep original fixed height and scroll logic */
       lg:h-full lg:min-h-[500px] lg:max-h-[600px]
     `}>
 
-      {/* --- BACKGROUND LAYER (Matches Old HTML) --- */}
+      {/* BACKGROUND */}
       {isRed ? (
-        // Red Theme: Gradient Background
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-700 via-red-600 to-red-800" />
       ) : (
-        // Blue Theme: Image + Overlay
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
-            src="./images/pg-text.png"
+            src="/images/pg-text.png"
             alt="Texture"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-50 mix-blend-overlay"
           />
@@ -50,79 +59,84 @@ const StaticPanel = ({ data }: { data: SectionData }) => {
         </div>
       )}
 
-      {/* Common Overlay (from Old HTML: bg-white/5 pointer-events-none z-10) */}
       <div className="absolute inset-0 bg-white/5 pointer-events-none z-10" />
 
-      {/* --- CONTENT (z-20) --- */}
+      {/* CONTENT */}
       <div className="relative z-20 flex flex-col h-full">
-
-        {/* HEADER */}
-        <div className="p-6 md:p-8 border-b border-white/20"> {/* Changed border-white/5 to border-white/20 to match old HTML */}
-          <div className="flex items-center gap-2 text-white/80 mb-1">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Academics</span>
+        <div className="p-6 md:p-8 border-b border-white/20">
+          <div className="flex items-center gap-2 text-white mb-2">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-xs uppercase tracking-[0.2em] font-bold opacity-90">Academics</span>
           </div>
-          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white">
+          <h2 className="text-2xl lg:text-3xl font-bold tracking-tight font-sans text-white drop-shadow-sm">
             {data.title}
           </h2>
         </div>
 
-        {/* LIST SECTION */}
-        {/* Mobile: No overflow-y-auto (lets page scroll). Desktop: overflow-y-auto (internal scroll) */}
-        <div className="flex-1 p-6 lg:overflow-y-auto custom-scrollbar pr-2">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 content-start"> {/* Changed from flex-col to grid to match old HTML layout */}
+        {/* SCROLLABLE LIST */}
+        <div 
+          ref={scrollContainerRef}
+          onScroll={checkScroll}
+          className="flex-1 p-6 lg:p-8 lg:overflow-y-auto custom-scrollbar"
+        >
+          <ul className="grid grid-cols-1 gap-3 lg:gap-4 content-start pb-4">
             {data.staticList.map((program, index) => (
               <li key={index}>
-                <Link
+                <a
+                target='_blank'
                   href={program.link}
                   className={`
-                    flex items-start gap-2 group/item cursor-pointer hover:bg-white/10 p-1.5 rounded-lg transition-colors
+                    flex items-center gap-3 group/item cursor-pointer 
+                    bg-white/5 hover:bg-white/15 
+                    border border-white/10 hover:border-white/30 
+                    p-3 lg:p-4 rounded-xl 
+                    transition-all duration-300 backdrop-blur-sm
                   `}
                 >
-                  {/* Dot Indicator */}
-                  <div className={`mt-1.5 w-1.5 h-1.5 rounded-full ${isRed ? 'bg-red-300' : 'bg-blue-300'} group-hover/item:bg-white flex-shrink-0 shadow-[0_0_5px_rgba(255,255,255,0.8)]`} />
-
-                  {/* Text */}
-                  <span className="text-[10px] lg:text-[11px] font-medium leading-tight text-white/80 group-hover/item:text-white transition-colors uppercase">
+                  <div className={`w-2.5 h-2.5 rounded-full ${dotColor} group-hover/item:bg-white group-hover/item:scale-110 flex-shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.6)] transition-all`} />
+                  <span className="text-sm lg:text-[15px] font-semibold leading-snug text-white group-hover/item:text-white transition-colors">
                     {program.label}
                   </span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Old HTML Bottom Icon Decoration */}
-        <GraduationCap
-          className="absolute -bottom-10 -right-6 w-64 h-64 text-black opacity-[0.1] rotate-[-20deg] pointer-events-none"
-        />
+        {/* SCROLL ARROW */}
+        <div className={`
+          absolute bottom-4 left-1/2 -translate-x-1/2 z-30 
+          pointer-events-none hidden lg:flex flex-col items-center 
+          text-white/80 transition-opacity duration-300
+          ${canScroll ? 'opacity-100 animate-bounce' : 'opacity-0'}
+        `}>
+          <ChevronDown className="w-6 h-6 drop-shadow-md" />
+        </div>
 
+        <div className={`
+          absolute bottom-0 left-0 right-0 h-16 
+          bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-20 
+          hidden lg:block transition-opacity duration-300
+          ${canScroll ? 'opacity-100' : 'opacity-0'}
+        `} />
+
+        <GraduationCap className="absolute -bottom-10 -right-6 w-64 h-64 text-black opacity-[0.1] rotate-[-20deg] pointer-events-none" />
       </div>
 
       <style jsx>{`
-        /* Only apply custom scrollbar styles on Desktop */
         @media (min-width: 1024px) {
-          .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05); /* Match old HTML track color */
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2); /* Match old HTML thumb color */
-            border-radius: 10px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.4); /* Match old HTML hover color */
-          }
+          .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+          .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; margin-block: 10px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 10px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
         }
       `}</style>
     </div>
   );
 };
 
-// --- SLIDER PANEL (Unchanged from your preferred version) ---
 
+// --- SLIDER PANEL (Restored exactly to your 6-course logic) ---
 const SliderPanel = ({ data }: { data: SectionData }) => {
   const styles = getThemeStyles(data.theme);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -157,10 +171,10 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
         </div>
         {showNavigation && (
           <div className="flex gap-3">
-            <button onClick={prevSlide} className={`group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300`}>
+            <button onClick={prevSlide} className="group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300">
               <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
             </button>
-            <button onClick={nextSlide} className={`group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300`}>
+            <button onClick={nextSlide} className="group p-2 md:p-3 rounded-full bg-white shadow-sm border border-gray-100 text-gray-400 hover:text-gray-900 hover:shadow-md active:scale-95 transition-all duration-300">
               <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
@@ -170,7 +184,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
       <div className="relative w-full">
         <div key={currentSlide} className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 animate-fade-in-up">
           {visibleItems.map((item, index) => (
-            <Link key={index} href={item.link} className="block h-full">
+            <a key={index} target='_blank' href="https://pay.hcaschennai.edu.in:5002/onlineregistration/" className="block h-full">
               <div className={`
                 group relative h-full flex flex-col justify-between
                 bg-white rounded-2xl 
@@ -195,7 +209,7 @@ const SliderPanel = ({ data }: { data: SectionData }) => {
                   </div>
                 </div>
               </div>
-            </Link>
+            </a>
           ))}
           {Array.from({ length: Math.max(0, itemsPerPage - visibleItems.length) }).map((_, i) => (
             <div key={`empty-${i}`} className="hidden lg:block h-full" />
@@ -220,8 +234,6 @@ export default function AcademicsPage() {
     <main className="w-full bg-white overflow-hidden">
       {programsData.map((section) => (
         <section key={section.id} className="relative bg-white flex items-center justify-center p-4 lg:p-10 lg:pt-32 border-b border-gray-100 last:border-0">
-
-          {/* Ambient Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
             {section.theme === 'red' ? (
@@ -237,19 +249,13 @@ export default function AcademicsPage() {
             )}
           </div>
 
-          {/* Main Container - items-stretch forces equal height */}
           <div className="w-full max-w-[1600px] flex flex-col xl:flex-row gap-8 items-stretch relative z-10">
-
-            {/* STATIC PANEL WRAPPER */}
             <div className={`w-full xl:w-[35%] h-auto ${section.layout === 'static-right' ? 'xl:order-2' : 'xl:order-1'}`}>
               <StaticPanel data={section} />
             </div>
-
-            {/* SLIDER PANEL WRAPPER */}
             <div className={`w-full xl:w-[65%] flex flex-col justify-center ${section.layout === 'static-right' ? 'xl:order-1' : 'xl:order-2'}`}>
               <SliderPanel data={section} />
             </div>
-
           </div>
         </section>
       ))}

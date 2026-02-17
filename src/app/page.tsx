@@ -24,7 +24,6 @@ export default function page() {
       <AcademicsPage />
       <AdmissionEligibility />
       <AboutCollege />
-
       <ScholarshipContactSection />
       <AccreditationSection />
       <WhyHCASSection />

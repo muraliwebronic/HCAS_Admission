@@ -59,7 +59,7 @@ const RankingAccreditation = () => {
                                 <div className="absolute inset-0 bg-yellow-400/30 rounded-full blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 scale-75 group-hover:scale-100" />
 
                                 <img
-                                    src="./images/naac.png"
+                                    src="/images/naac.png"
                                     // Note: Ensure you have a clean NAAC logo here
                                     alt="NAAC Grade A Accreditation"
                                     className="relative w-40 md:w-48 h-auto object-contain drop-shadow-lg transform group-hover:scale-105 group-hover:rotate-2 transition-transform duration-500 ease-out"
@@ -111,7 +111,7 @@ const RankingAccreditation = () => {
 
                             {/* Background Building Image */}
                             <img
-                                src="./images/Home-Slider4.webp"
+                                src="/images/Home-Slider4.webp"
                                 alt="Hindustan College Campus"
                                 className="w-full h-full object-cover transform scale-100 group-hover/image:scale-110 transition-transform duration-[1.5s] ease-out"
                             />
@@ -122,7 +122,7 @@ const RankingAccreditation = () => {
                                     {/* Glow behind logo */}
                                     <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-150 animate-pulse-slow"></div>
                                     <img
-                                        src="./images/logo.png"
+                                        src="/images/logo.png"
                                         alt="HCAS Logo"
                                         className="relative w-48 md:w-64 h-auto drop-shadow-2xl opacity-95 hover:opacity-100 hover:scale-105 transition-all duration-300"
                                     />
